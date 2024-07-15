@@ -1,0 +1,24 @@
+{
+	"name": "nuxt-auth",
+	"private": true,
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev --port=3002",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare"
+	},
+	"devDependencies": {
+		"@nuxtjs/color-mode": "^3.4.1",
+		"@nuxtjs/tailwindcss": "^6.7.0",
+		"@tailwindcss/forms": "^0.5.3",
+		"@types/node": "^18",
+		"nuxt": "^3.12.3",
+		"nuxt-icon": "^0.6.10",
+		"sass": "^1.77.0"
+	},
+	"dependencies": {
+		"@headlessui/vue": "^1.7.21",
+		"@heroicons/vue": "^2.1.3"
+	}
+}
