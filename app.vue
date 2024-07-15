@@ -1,6 +1,6 @@
 <script setup>
     useHead({
-        titleTemplate: `Kiosk | %s`,
+        titleTemplate: `Que | %s`,
     })
 </script>
 <template>
