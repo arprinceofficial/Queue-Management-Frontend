@@ -55,8 +55,8 @@ export default defineNuxtPlugin(() => {
                 var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : ""
                 return dDisplay + hDisplay + mDisplay + sDisplay
             },
-            months: (num: any) => {
-                var obj = {
+            months: (num: number) => {
+                var obj: { [key: number]: string } = {
                     1: 'January',
                     2: 'February',
                     3: 'March',
@@ -70,7 +70,7 @@ export default defineNuxtPlugin(() => {
                     11: 'November',
                     12: 'December'
                 }
-
+            
                 return obj[num];
             },
             inWords: (num: any) => {
