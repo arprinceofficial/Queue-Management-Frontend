@@ -1,6 +1,6 @@
 <script setup>
     useHead({
-        titleTemplate: `Que | %s`,
+        titleTemplate: `Queue | %s`,
     })
 </script>
 <template>
