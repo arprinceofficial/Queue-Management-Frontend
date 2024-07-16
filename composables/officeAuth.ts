@@ -36,14 +36,14 @@ export const officeAuth = () => {
 	async function login(credentials: LoginCredentials) {
 		if (isOfficeLoggedIn.value) return;
 
-		const response: any = await $http(LOGIN, { method: 'post', body: credentials });
+		const response: any = await $fetchOffice(LOGIN, { method: 'post', body: credentials });
 		cookie.value = response.data?.access_token;
 		return response;
 	}
 
 	async function logout() {
 		if (!isOfficeLoggedIn.value) return;
-		$http(LOGOUT);
+		$fetchOffice(LOGOUT, { method: 'post' , body: { id: office_user.value?.data?.user?.id } });
 		office_user.value = null;
 		cookie.value = null;
 		await router.push('/');
@@ -60,7 +60,7 @@ export const officeAuth = () => {
 
 export const fetchCurrentUser = async () => {
 	try {
-		return await $http<OfficeUser>(CURRENT_USER, {
+		return await $fetchOffice<OfficeUser>(CURRENT_USER, {
 			redirectIfNotAuthenticated: false
 		});
 	} catch (error: any) {

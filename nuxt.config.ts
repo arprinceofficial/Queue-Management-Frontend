@@ -3,6 +3,8 @@ export default defineNuxtConfig({
 	runtimeConfig: {
 		public: {
 			apiURL: process.env.NUXT_PUBLIC_API_URL,
+			API_URL_OFFICE: process.env.API_URL_OFFICE,
+			API_URL_AGENT: process.env.API_URL_AGENT,
 		}
 	},
 

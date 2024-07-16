@@ -1,4 +1,4 @@
-import { $fetch, FetchError, type FetchOptions } from 'ofetch';
+import { $fetch, FetchError } from 'ofetch';
 
 export const $X_TOKEN = 'X-TOKEN';
 const AUTH_HEADER = 'Authorization';
@@ -10,18 +10,11 @@ interface ResponseMap {
 }
 type ResponseType = keyof ResponseMap | 'json';
 
-export type HttpOptions<R extends ResponseType> = FetchOptions<R> & {
-	redirectIfNotAuthenticated?: boolean;
-	redirectIfNotVerified?: boolean;
-};
-
-export async function $http<T, R extends ResponseType = 'json'>(
+export async function $fetchOffice<T, R extends ResponseType = 'json'>(
 	path: RequestInfo,
-	{ redirectIfNotAuthenticated = true, redirectIfNotVerified = true, ...options }: HttpOptions<R> = {}
+	{ ...options }
 ) {
-	const { apiURL } = useRuntimeConfig().public;
-	const router = useRouter();
-
+	const { API_URL_OFFICE } = useRuntimeConfig().public;
 	let token = useCookie($X_TOKEN).value;
 
 	if (process.client && ['get', 'post', 'delete', 'put', 'patch'].includes(options?.method?.toLowerCase() ?? '')) {
@@ -47,27 +40,16 @@ export async function $http<T, R extends ResponseType = 'json'>(
 
 	try {
 		return await $fetch<T, R>(path, {
-			baseURL: apiURL,
+			baseURL: API_URL_OFFICE,
 			...options,
 			headers
 		});
 	} catch (error) {
 		if (!(error instanceof FetchError)) throw error;
-
 		const status = error.response?.status ?? -1;
-
-		if (redirectIfNotAuthenticated && [401, 419].includes(status)) {
-			await router.push('/');
-		}
-
-		if (redirectIfNotVerified && [409].includes(status)) {
-			await router.push('/verify-email');
-		}
-
 		if ([500].includes(status)) {
 			console.error('[Http Error]', error.data?.message, error.data);
 		}
-
 		throw error;
 	}
 }
