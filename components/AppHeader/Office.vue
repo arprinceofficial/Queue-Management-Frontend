@@ -25,13 +25,13 @@
     <!-- <pre>{{ office_user }}</pre> -->
     <nav class="h-[75px] dark:bg-gray-800 dark:bg-[linear-gradient(to_right,#333333,#000000)] bg-[#F1F6FF] border-b border-gray-100 dark:border-gray-700 z-[60] top-0">
         <!-- Primary Navigation Menu -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div class="flex justify-between h-full">
                 <div class="flex">
                     <!-- Logo -->
                     <div class="shrink-0 flex items-center">
                         <NuxtLink href="/">
-                            <ApplicationLogo :width="'100px'" :height="'100px'" />
+                            <ApplicationLogo :width="'220px'" :height="'220px'" />
                         </NuxtLink>
                     </div>
                 </div>
