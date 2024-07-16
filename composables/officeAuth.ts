@@ -65,6 +65,6 @@ export const fetchOfficeCurrentUser = async () => {
 		});
 	} catch (error: any) {
 		if ([401, 400, 419].includes(error?.response?.status)) return null;
-		console.error(error);
+		// console.log(error);
 	}
 };

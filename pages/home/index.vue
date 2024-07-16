@@ -1,6 +1,6 @@
 <script setup>
 	useHead({ title: 'Home' });
-	definePageMeta({ middleware: ['auth-office'], layout: 'office' });
+	definePageMeta({ middleware: ['auth'], layout: 'office' });
 </script>
 
 <template>
