@@ -90,14 +90,14 @@
         </div>
 
         <!-- Responsive Navigation Menu -->
-        <div :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }" class="sm:hidden">
-            <div class="pt-2 pb-3 space-y-1">
+        <div :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }" class="sm:hidden bg-white z-50 relative">
+            <!-- <div class="pt-2 pb-3 space-y-1">
                 <ResponsiveNavLink href="/home"> Home </ResponsiveNavLink>
-            </div>
+            </div> -->
 
             <!-- Responsive Settings Options -->
-            <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-                <div class="px-4">
+            <div class="pt-4 pb-1">
+                <div class="px-4 pb-4 border-b border-gray-200 dark:border-gray-600">
                     <div class="font-medium text-base text-gray-800 dark:text-gray-200">
                         {{ office_user?.data?.user.first_name + ' ' + office_user?.data?.user.last_name }}
                     </div>
@@ -105,7 +105,7 @@
                 </div>
 
                 <div class="mt-3 space-y-1">
-                    <ResponsiveNavLink href="/home"> Home </ResponsiveNavLink>
+                    <!-- <ResponsiveNavLink href="/home"> Home </ResponsiveNavLink> -->
                     <button type="button" @click="logout"
                         class="block w-full pl-3 pr-4 py-2 border-l-4 border-transparent text-left text-base font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 focus:outline-none focus:text-gray-800 dark:focus:text-gray-200 focus:bg-gray-50 dark:focus:bg-gray-700 focus:border-gray-300 dark:focus:border-gray-600 transition duration-150 ease-in-out">
                         Log Out
