@@ -1,5 +1,5 @@
 {
-	"name": "nuxt-auth",
+	"name": "queue-management",
 	"private": true,
 	"scripts": {
 		"build": "nuxt build",
