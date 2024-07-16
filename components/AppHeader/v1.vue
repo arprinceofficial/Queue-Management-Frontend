@@ -1,11 +1,11 @@
 <script setup>
     const showingNavigationDropdown = ref(false);
-    const { user = {}, logout } = useAuth();
-    // console.log(user);
+    const { office_user = {}, logout } = officeAuth();
+    // console.log(office_user);
     const profile_image = ref('');
     async function getProfileImage() {
         try {
-            const response = await $http(user.value?.data.user.profile_image, {
+            const response = await $http(office_user.value?.data.user.profile_image, {
                 method: 'GET',
                 responseType: 'blob', // Set the response type to 'blob'
             });
@@ -22,7 +22,7 @@
     });
 </script>
 <template>
-    <!-- <pre>{{ user }}</pre> -->
+    <!-- <pre>{{ office_user }}</pre> -->
     <nav class="h-[75px] dark:bg-gray-800 dark:bg-[linear-gradient(to_right,#333333,#000000)] bg-[#F1F6FF] border-b border-gray-100 dark:border-gray-700 z-[60] top-0">
         <!-- Primary Navigation Menu -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,7 +45,7 @@
                                         class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-transparent dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                                         <img class="h-8 w-8 rounded-full object-cover" :src="profile_image ?? ''"
                                         alt="profile_image" />
-                                        <span class="pr-2 pl-2">{{ user?.data?.user.last_name }}</span>
+                                        <span class="pr-2 pl-2">{{ office_user?.data?.user.first_name + office_user?.data?.user.last_name }}</span>
                                     </button>
                                 </span>
                             </template>
@@ -54,9 +54,9 @@
                                 <div class="py-2 border-b border-gray-200 dark:border-gray-600">
                                     <div class="px-4">
                                         <div class="font-medium text-sm text-gray-800 dark:text-gray-200">
-                                            {{ user?.data?.user.first_name + ' ' +user?.data?.user.last_name }}
+                                            {{ office_user?.data?.user.first_name + ' ' + office_user?.data?.user.last_name }}
                                         </div>
-                                        <div class="font-medium text-sm text-gray-500">{{ user?.data?.user?.email }}</div>
+                                        <div class="font-medium text-sm text-gray-500">{{ office_user?.data?.user?.email }}</div>
                                     </div>
                                 </div>
                                 <!-- <DropdownLink href="/home"> Home </DropdownLink> -->
@@ -99,9 +99,9 @@
             <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
                 <div class="px-4">
                     <div class="font-medium text-base text-gray-800 dark:text-gray-200">
-                        {{ user?.data?.user.first_name + ' ' +user?.data?.user.last_name }}
+                        {{ office_user?.data?.user.first_name + ' ' + office_user?.data?.user.last_name }}
                     </div>
-                    <div class="font-medium text-sm text-gray-500">{{ user?.data?.user?.email }}</div>
+                    <div class="font-medium text-sm text-gray-500">{{ office_user?.data?.user?.email }}</div>
                 </div>
 
                 <div class="mt-3 space-y-1">

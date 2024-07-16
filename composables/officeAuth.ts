@@ -1,4 +1,4 @@
-export type User = {
+export type OfficeUser = {
 	name?: string;
 	email?: string;
 };
@@ -14,27 +14,27 @@ const LOGOUT = '/logout';
 const CURRENT_USER = '/current-user';
 
 // Value is initialized in: ~/plugins/auth.ts
-export const useUser = () => {
-	return useState<User | undefined | null>('user', () => undefined);
+export const officeUser = () => {
+	return useState<OfficeUser | undefined | null>('office_user', () => undefined);
 };
 
-export const useAuth = () => {
+export const officeAuth = () => {
 	const router = useRouter();
 
-	const user = useUser();
-	const isLoggedIn = computed(() => !!user.value);
+	const office_user = officeUser();
+	const isOfficeLoggedIn = computed(() => !!office_user.value);
 	const cookie = useCookie($X_TOKEN);
 
 	async function refresh() {
 		try {
-			user.value = await fetchCurrentUser();
+			office_user.value = await fetchCurrentUser();
 		} catch {
-			user.value = null;
+			office_user.value = null;
 		}
 	}
 
 	async function login(credentials: LoginCredentials) {
-		if (isLoggedIn.value) return;
+		if (isOfficeLoggedIn.value) return;
 
 		const response: any = await $http(LOGIN, { method: 'post', body: credentials });
 		cookie.value = response.data?.access_token;
@@ -42,16 +42,16 @@ export const useAuth = () => {
 	}
 
 	async function logout() {
-		if (!isLoggedIn.value) return;
+		if (!isOfficeLoggedIn.value) return;
 		$http(LOGOUT);
-		user.value = null;
+		office_user.value = null;
 		cookie.value = null;
 		await router.push('/');
 	}
 
 	return {
-		user,
-		isLoggedIn,
+		office_user,
+		isOfficeLoggedIn,
 		login,
 		logout,
 		refresh
@@ -60,7 +60,7 @@ export const useAuth = () => {
 
 export const fetchCurrentUser = async () => {
 	try {
-		return await $http<User>(CURRENT_USER, {
+		return await $http<OfficeUser>(CURRENT_USER, {
 			redirectIfNotAuthenticated: false
 		});
 	} catch (error: any) {

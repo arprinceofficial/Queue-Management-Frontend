@@ -16,7 +16,7 @@
 	});
 
 	const unauthorizedError = ref('');
-	const { login } = useAuth();
+	const { login } = officeAuth();
 	const isLoading = ref(false);
 
 	const submit = async () => {
