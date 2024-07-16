@@ -3,7 +3,7 @@ export type OfficeUser = {
 	email?: string;
 };
 
-export type LoginCredentials = {
+export type LoginCredentialsOffice = {
 	email: string;
 	password: string;
 };
@@ -27,13 +27,13 @@ export const officeAuth = () => {
 
 	async function refresh() {
 		try {
-			office_user.value = await fetchCurrentUser();
+			office_user.value = await fetchOfficeCurrentUser();
 		} catch {
 			office_user.value = null;
 		}
 	}
 
-	async function login(credentials: LoginCredentials) {
+	async function login(credentials: LoginCredentialsOffice) {
 		if (isOfficeLoggedIn.value) return;
 
 		const response: any = await $fetchOffice(LOGIN, { method: 'post', body: credentials });
@@ -58,7 +58,7 @@ export const officeAuth = () => {
 	};
 };
 
-export const fetchCurrentUser = async () => {
+export const fetchOfficeCurrentUser = async () => {
 	try {
 		return await $fetchOffice<OfficeUser>(CURRENT_USER, {
 			redirectIfNotAuthenticated: false
