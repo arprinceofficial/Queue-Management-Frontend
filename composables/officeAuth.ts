@@ -23,7 +23,7 @@ export const officeAuth = () => {
 
 	const office_user = officeUser();
 	const isOfficeLoggedIn = computed(() => !!office_user.value);
-	const cookie = useCookie($X_TOKEN);
+	const cookie = useCookie($XO_TOKEN);
 
 	async function refresh() {
 		try {

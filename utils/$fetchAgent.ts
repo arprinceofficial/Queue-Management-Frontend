@@ -1,6 +1,6 @@
 import { $fetch, FetchError } from 'ofetch';
 
-export const $XO_TOKEN = 'XO-TOKEN';
+export const $XA_TOKEN = 'XA-TOKEN';
 const AUTH_HEADER = 'Authorization';
 
 interface ResponseMap {
@@ -10,15 +10,15 @@ interface ResponseMap {
 }
 type ResponseType = keyof ResponseMap | 'json';
 
-export async function $fetchOffice<T, R extends ResponseType = 'json'>(
+export async function $fetchAgent<T, R extends ResponseType = 'json'>(
 	path: RequestInfo,
 	{ ...options }
 ) {
 	const { API_URL_OFFICE } = useRuntimeConfig().public;
-	let token = useCookie($XO_TOKEN).value;
+	let token = useCookie($XA_TOKEN).value;
 
 	if (process.client && ['get', 'post', 'delete', 'put', 'patch'].includes(options?.method?.toLowerCase() ?? '')) {
-		token = getCookie($XO_TOKEN);
+		token = getCookie($XA_TOKEN);
 	}
 
 	const url = useRequestURL();

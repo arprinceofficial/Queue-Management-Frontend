@@ -3,5 +3,6 @@
 	definePageMeta({ middleware: ['guest'], layout: 'guest' });
 </script>
 <template>
-	<AuthOfficeLogin />
+	AgentLogin
+	<AuthAgentLogin />
 </template>
