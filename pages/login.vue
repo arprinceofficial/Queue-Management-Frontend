@@ -1,7 +1,7 @@
 <script setup>
 	useHead({ title: 'Login' });
-	definePageMeta({ middleware: ['guest'], layout: 'guest' });
+	definePageMeta({ middleware: ['guest-office'], layout: 'guest' });
 </script>
 <template>
-	<AuthOfficeLogin />
+	<AuthLoginForm />
 </template>
