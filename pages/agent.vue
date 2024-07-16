@@ -1,8 +1,7 @@
 <script setup>
-	useHead({ title: 'Login' });
+	useHead({ title: 'Agent Login' });
 	definePageMeta({ middleware: ['guest'], layout: 'guest' });
 </script>
 <template>
-	AgentLogin
 	<AuthAgentLogin />
 </template>

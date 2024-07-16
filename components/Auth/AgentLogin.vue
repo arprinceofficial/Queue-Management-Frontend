@@ -1,5 +1,4 @@
 <script setup>
-	useHead({ title: 'Login' });
 	import {
 		LockClosedIcon,
 		UserIcon
