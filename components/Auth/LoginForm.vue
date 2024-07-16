@@ -82,9 +82,7 @@
 							required 
 							autocomplete="current-password"
 							placeholder="i.e. password#123" />
-						<i :class="['absolute top-[25px] right-10 text-[24px] text-gray-600 fa fa-eye cursor-pointer', password_open ? 'fa-eye-slash' : 'fa-eye']"
-							@click="password_view_status(!password_open)"></i>
-						<i :class="['absolute top-[25px] right-10 text-[24px] fa fa-eye-slash text-gray-400 cursor-pointer', password_open ? 'fa-eye' : 'fa-eye-slash']"
+						<i :class="['absolute top-[25px] right-10 text-[24px] text-gray-600 fa cursor-pointer hidden', password_open ? 'fa-eye' : 'fa-eye-slash']"
 							@click="password_view_status(!password_open)"></i>
 					</div>
 				</div>
