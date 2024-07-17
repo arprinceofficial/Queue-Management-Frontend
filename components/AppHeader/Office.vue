@@ -90,7 +90,7 @@
         </div>
 
         <!-- Responsive Navigation Menu -->
-        <div :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }" class="sm:hidden bg-white z-50 relative">
+        <div :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }" class="sm:hidden bg-[#F1F6FF] z-50 relative border-t border-gray-200">
             <!-- <div class="pt-2 pb-3 space-y-1">
                 <ResponsiveNavLink href="/home"> Home </ResponsiveNavLink>
             </div> -->
