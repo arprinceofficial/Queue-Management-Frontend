@@ -1,39 +1,20 @@
-export type OfficeUser = {
-	name?: string;
-	email?: string;
-};
-
-export type LoginCredentialsOffice = {
-	email: string;
-	password: string;
-};
-
 // api endpoint
 const LOGIN = '/login';
 const LOGOUT = '/logout';
 const CURRENT_USER = '/current-user';
 
-// Value is initialized in: ~/plugins/auth.ts
+// Value is initialized in: ~/plugins/authOffice.ts
 export const officeUser = () => {
-	return useState<OfficeUser | undefined | null>('office_user', () => undefined);
+	return useState('office_user', () => undefined);
 };
 
 export const officeAuth = () => {
 	const router = useRouter();
-
-	const office_user = officeUser();
+	const office_user: any = officeUser();
 	const isOfficeLoggedIn = computed(() => !!office_user.value);
 	const cookie = useCookie($XO_TOKEN);
 
-	async function refresh() {
-		try {
-			office_user.value = await fetchOfficeCurrentUser();
-		} catch {
-			office_user.value = null;
-		}
-	}
-
-	async function login(credentials: LoginCredentialsOffice) {
+	async function login(credentials: any) {
 		if (isOfficeLoggedIn.value) return;
 
 		const response: any = await $fetchOffice(LOGIN, { method: 'post', body: credentials });
@@ -43,7 +24,7 @@ export const officeAuth = () => {
 
 	async function logout() {
 		if (!isOfficeLoggedIn.value) return;
-		$fetchOffice(LOGOUT, { method: 'post' , body: { id: office_user.value?.data?.user?.id } });
+		$fetchOffice(LOGOUT, { method: 'post', body: { id: office_user.value?.data?.user?.id } });
 		office_user.value = null;
 		cookie.value = null;
 		await router.push('/');
@@ -53,14 +34,13 @@ export const officeAuth = () => {
 		office_user,
 		isOfficeLoggedIn,
 		login,
-		logout,
-		refresh
+		logout
 	};
 };
 
 export const fetchOfficeCurrentUser = async () => {
 	try {
-		return await $fetchOffice<OfficeUser>(CURRENT_USER, {
+		return await $fetchOffice(CURRENT_USER, {
 			redirectIfNotAuthenticated: false
 		});
 	} catch (error: any) {
