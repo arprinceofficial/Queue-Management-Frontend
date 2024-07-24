@@ -27,7 +27,7 @@ export const agentAuth = () => {
 		$fetchAgent(LOGOUT, { method: 'post', body: { id: agent_user.value?.data?.user?.id } });
 		agent_user.value = null;
 		cookie.value = null;
-		await router.push('/');
+		await router.push('/agent');
 	}
 
 	return {
