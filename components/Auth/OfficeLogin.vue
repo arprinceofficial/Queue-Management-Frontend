@@ -94,6 +94,6 @@
 			</form>
 		</div>
 
-		<img class="pt-10" src="/img/login-footer.png" alt="">
+		<img class="pt-6" src="/img/login-footer.png" alt="">
 	</ClientOnly>
 </template>
