@@ -4,5 +4,7 @@
 	const agent_user = agentUser();
 </script>
 <template>
-	<AuthOfficeLogin />
+	<div class="min-h-screen flex flex-col justify-between items-center">
+		<AuthOfficeLogin />
+	</div>
 </template>

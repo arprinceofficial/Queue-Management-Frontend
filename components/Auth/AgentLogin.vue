@@ -37,63 +37,70 @@
 
 <template>
 	<ClientOnly>
-		<div class="mt-24">
-			<div>
-				<div class="flex flex-col justify-center items-center">
-					<!-- <NuxtLink to="/"> -->
-					<ApplicationLogo :width="'404px'" :height="'121px'" />
-					<!-- </NuxtLink> -->
-					<h2 class="mt-6 text-center text-[64px] font-bold tracking-tight text-gray-900 dark:text-gray-200 mt-[80px]">
-						Login</h2>
+		<div class="h-screen w-full flex flex-wrap flex items-center justify-center">
+			<div class="sm:w-1/3 w-full sm:pr-4 pr-3 pl-3 pb-3">
+				<div class="p-5">
+					<div>
+						<div class="flex flex-col justify-center items-center">
+							<!-- <NuxtLink to="/"> -->
+							<ApplicationLogo :width="'280px'" :height="'100%'" />
+							<!-- </NuxtLink> -->
+							
+						</div>
+					</div>
+					<form @submit.prevent="submit" class="mt-4 rounded-lg p-5 border-[2px] border-gray-200 dark:border-gray-700 ">
+						<h2 class="mt-2 text-center text-[22px] font-bold tracking-tight text-gray-900 dark:text-gray-200">
+							Queue Management</h2>
+						<div class="mt-10">
+							<InputLabel for="loginInput" value="User ID" class="text-[14px] mb-2" />
+							<div class="relative mt-1">
+								<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+									<UserIcon class="h-4 w-4 text-gray-400" aria-hidden="true" />
+								</div>
+								<InputText
+									id="loginInput"
+									type="text"
+									class="pl-[10px] h-[40px] sm:text-sm text-[14px] pl-[40px]"
+									v-model="form.loginInput"
+									required
+									autofocus
+									autocomplete="loginInput" 
+									placeholder="i.e. 2324I245986789"/>
+							</div>
+							<InputError class="mt-2" :message="unauthorizedError" />
+						</div>
+		
+						<div class="mt-2">
+							<InputLabel for="password" value="Password" class="text-[14px] mb-2" />
+							<div class="relative mt-1">
+								<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+									<LockClosedIcon class="h-4 w-4 text-gray-400 " aria-hidden="true" />
+								</div>
+								<InputText 
+									id="password" 
+									:type="password_open ? 'text' : 'password'"
+									class="pl-[10px] h-[40px] sm:text-sm text-[14px] pl-[40px]"
+									v-model="form.password" 
+									required 
+									autocomplete="current-password"
+									placeholder="i.e. password#123" />
+								<i :class="['absolute top-[14px] right-4 text-[14px] text-gray-600 fa cursor-pointer hidden', password_open ? 'fa-eye' : 'fa-eye-slash']"
+									@click="password_view_status(!password_open)"></i>
+							</div>
+						</div>
+		
+						<div class="flex items-center justify-center mt-16">
+							<ButtonPrimary class="w-[100%] h-[45px] text-[14px]" :class="{ 'opacity-25': isLoading }" :disabled="isLoading">
+								Login
+							</ButtonPrimary>
+						</div>
+					</form>
 				</div>
 			</div>
-			<form @submit.prevent="submit" class="mt-24">
-				<div class="mt-10">
-					<InputLabel for="loginInput" value="User ID" class="text-[25px] mb-6" />
-					<div class="relative mt-1">
-						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-8">
-							<UserIcon class="h-8 w-8 text-gray-400" aria-hidden="true" />
-						</div>
-						<InputText
-							id="loginInput"
-							type="text"
-							class="pl-[80px]"
-							v-model="form.loginInput"
-							required
-							autofocus
-							autocomplete="loginInput" 
-							placeholder="i.e. 2324I245986789"/>
-					</div>
-					<InputError class="mt-2" :message="unauthorizedError" />
-				</div>
-
-				<div class="mt-10">
-					<InputLabel for="password" value="Password" class="text-[25px] mb-6" />
-					<div class="relative mt-1">
-						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-8">
-							<LockClosedIcon class="h-8 w-8 text-gray-400 " aria-hidden="true" />
-						</div>
-						<InputText 
-							id="password" 
-							:type="password_open ? 'text' : 'password'"
-							class="pl-[80px]"
-							v-model="form.password" 
-							required 
-							autocomplete="current-password"
-							placeholder="i.e. password#123" />
-						<i :class="['absolute top-[25px] right-10 text-[24px] text-gray-600 fa cursor-pointer hidden', password_open ? 'fa-eye' : 'fa-eye-slash']"
-							@click="password_view_status(!password_open)"></i>
-					</div>
-				</div>
-
-				<div class="flex items-center justify-center mt-16">
-					<ButtonPrimary class="w-[618px]" :class="{ 'opacity-25': isLoading }" :disabled="isLoading">
-						Login
-					</ButtonPrimary>
-				</div>
-			</form>
+	
+			<div class="sm:w-2/3 w-full sm:h-full flex items-center justify-center p-5 bg-[#E6EEFF] ">
+				<img class="w-full max-w-[80%]" src="/img/agent-login-image.png" alt="">
+			</div>	
 		</div>
-
-		<img class="pt-6" src="/img/login-footer.png" alt="">
 	</ClientOnly>
 </template>

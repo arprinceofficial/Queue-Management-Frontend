@@ -57,7 +57,7 @@
 						<InputText
 							id="loginInput"
 							type="text"
-							class="pl-[80px]"
+							class="pl-[80px] h-[72px] sm:text-xl text-[20px]"
 							v-model="form.loginInput"
 							required
 							autofocus
@@ -76,7 +76,7 @@
 						<InputText 
 							id="password" 
 							:type="password_open ? 'text' : 'password'"
-							class="pl-[80px]"
+							class="pl-[80px] h-[72px] sm:text-xl text-[20px]"
 							v-model="form.password" 
 							required 
 							autocomplete="current-password"
@@ -87,7 +87,7 @@
 				</div>
 
 				<div class="flex items-center justify-center mt-16">
-					<ButtonPrimary class="w-[618px]" :class="{ 'opacity-25': isLoading }" :disabled="isLoading">
+					<ButtonPrimary class="w-[618px] h-[85px] text-[32px] px-[53px] py-[17px] gap-[10px]" :class="{ 'opacity-25': isLoading }" :disabled="isLoading">
 						Login
 					</ButtonPrimary>
 				</div>
