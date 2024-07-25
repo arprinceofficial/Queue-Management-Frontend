@@ -40,7 +40,7 @@
 		<div class="h-screen w-full flex flex-wrap flex items-center justify-center">
 			<div class="sm:w-1/3 w-full sm:pr-4 pr-3 pb-3">
 				<div class="p-5 relative">
-					<div class="absolute left-0 flex items-center" >
+					<div class="absolute left-0 flex items-center h-full" >
 						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="347" viewBox="0 0 18 347" fill="none">
 							<path d="M0.887451 0.700195L17.0125 11.4502V336.1L0.887451 346.85V0.700195Z" fill="#FCBD01"/>
 						</svg>
