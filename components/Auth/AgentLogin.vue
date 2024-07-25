@@ -25,7 +25,7 @@
 			const response = await login(form);
 			// console.log(response);
 			if (response) {
-				window.location.href = '/customer';
+				window.location.href = '/agent';
 				return;
 			}
 		} catch (error) {
