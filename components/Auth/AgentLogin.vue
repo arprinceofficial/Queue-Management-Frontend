@@ -38,13 +38,13 @@
 <template>
 	<ClientOnly>
 		<div class="h-screen w-full flex flex-wrap flex items-center justify-center">
-			<div class="sm:w-1/3 w-full sm:pr-4 pr-3 pb-3">
-				<div class="p-5 relative max-w-[500px]">
-					<div class="absolute left-0 flex items-center h-full" >
-						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="347" viewBox="0 0 18 347" fill="none">
-							<path d="M0.887451 0.700195L17.0125 11.4502V336.1L0.887451 346.85V0.700195Z" fill="#FCBD01"/>
-						</svg>
-					</div>
+			<div class="relative md:w-1/3 w-full sm:pr-4 pr-3 pb-3 flex justify-center">
+				<div class="absolute left-0 flex items-center h-full" >
+					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="347" viewBox="0 0 18 347" fill="none">
+						<path d="M0.887451 0.700195L17.0125 11.4502V336.1L0.887451 346.85V0.700195Z" fill="#FCBD01"/>
+					</svg>
+				</div>
+				<div class="p-5 sm:max-w-[500px] w-full">
 					<div class="pl-8">
 						<div>
 							<div class="flex flex-col justify-center items-center">
@@ -105,7 +105,7 @@
 				</div>
 			</div>
 	
-			<div class="sm:w-2/3 w-full sm:h-full flex items-center justify-center p-5 bg-[#E6EEFF] ">
+			<div class="md:flex hidden md:w-2/3 w-full sm:h-full items-center justify-center p-5 bg-[#E6EEFF] ">
 				<img class="w-full max-w-[80%]" src="/img/agent-login-image.png" alt="">
 			</div>	
 		</div>
