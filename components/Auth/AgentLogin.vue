@@ -25,7 +25,7 @@
 			const response = await login(form);
 			// console.log(response);
 			if (response) {
-				window.location.href = '/agent';
+				window.location.href = '/agent-panel';
 				return;
 			}
 		} catch (error) {
