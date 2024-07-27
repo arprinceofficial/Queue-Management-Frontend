@@ -17,9 +17,11 @@
                     <div class="flex items-center">
                         <span class="text-[#637381] text-[48px]">to&nbsp;</span> <span class="text-[#0070C0] text-[54px] font-bold">Digital</span> <span class="text-[#00B076] text-[54px] font-semibold">Bangsamoro</span>
                     </div>
-                    <ButtonPrimary class="mt-[200px] w-[420px] h-[85px] text-[32px]">
-						Get Started
-					</ButtonPrimary>
+                    <NuxtLink to="/service" class="mt-[200px] ">
+						<ButtonPrimary class="w-[420px] h-[85px] text-[32px]">
+							Get Started
+						</ButtonPrimary>
+					</NuxtLink>
 				</div>
 			</div>
 		</div>
