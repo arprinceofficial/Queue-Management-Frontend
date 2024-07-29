@@ -14,7 +14,7 @@ export async function $fetchAgent<T, R extends ResponseType = 'json'>(
 	path: RequestInfo,
 	{ ...options }
 ) {
-	const { API_URL_OFFICE } = useRuntimeConfig().public;
+	const { API_URL_AGENT } = useRuntimeConfig().public;
 	let token = useCookie($XA_TOKEN).value;
 
 	if (process.client && ['get', 'post', 'delete', 'put', 'patch'].includes(options?.method?.toLowerCase() ?? '')) {
@@ -40,7 +40,7 @@ export async function $fetchAgent<T, R extends ResponseType = 'json'>(
 
 	try {
 		return await $fetch<T, R>(path, {
-			baseURL: API_URL_OFFICE,
+			baseURL: API_URL_AGENT,
 			...options,
 			headers
 		});
