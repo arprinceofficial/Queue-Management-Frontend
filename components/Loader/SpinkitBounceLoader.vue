@@ -1,7 +1,5 @@
-<script>
-	export default {
-		name: 'SpinkitBounceLoader'
-	}
+<script setup>
+	const name = 'SpinkitBounceLoader';
 </script>
 <template>
 	<div class="spinkit-bounce-loader">

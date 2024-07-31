@@ -1,10 +1,12 @@
 export default defineNuxtPlugin(() => {
     return {
         provide: {
-            // Agent API Endpoints
-            agent_cms_languages: 'cms/languages',
             // Office API Endpoints
-            office_cms_languages: 'cms/languages',
+            api_office_queue_services: 'queue-services',
+            api_office_queue_vouchers_store :'queue-vouchers/store',
+
+            // Agent API Endpoints
+            api_agent: '',
         }
     };
 });

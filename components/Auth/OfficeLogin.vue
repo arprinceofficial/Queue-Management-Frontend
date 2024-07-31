@@ -10,8 +10,8 @@
 	}
 
 	const form = reactive({
-		loginInput: 'ashiqurr04@gmail.com',
-		password: '12345678'
+		email: '',
+		password: ''
 	});
 
 	const unauthorizedError = ref('');
@@ -49,19 +49,19 @@
 			</div>
 			<form @submit.prevent="submit" class="mt-24">
 				<div class="mt-10">
-					<InputLabel for="loginInput" value="User ID" class="text-[25px] mb-6" />
+					<InputLabel for="email" value="User ID" class="text-[25px] mb-6" />
 					<div class="relative mt-1">
 						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-8">
 							<UserIcon class="h-8 w-8 text-gray-400" aria-hidden="true" />
 						</div>
 						<InputText
-							id="loginInput"
+							id="email"
 							type="text"
-							class="pl-[80px] h-[72px] sm:text-xl text-[20px]"
-							v-model="form.loginInput"
+							class="pl-[80px] h-[72px] sm:text-xl text-[20px] rounded-[50px]"
+							v-model="form.email"
 							required
 							autofocus
-							autocomplete="loginInput" 
+							autocomplete="email" 
 							placeholder="i.e. 2324I245986789"/>
 					</div>
 					<InputError class="mt-2" :message="unauthorizedError" />
@@ -76,7 +76,7 @@
 						<InputText 
 							id="password" 
 							:type="password_open ? 'text' : 'password'"
-							class="pl-[80px] h-[72px] sm:text-xl text-[20px]"
+							class="pl-[80px] h-[72px] sm:text-xl text-[20px] rounded-[50px]"
 							v-model="form.password" 
 							required 
 							autocomplete="current-password"

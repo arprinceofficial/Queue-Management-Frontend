@@ -1,8 +1,8 @@
 <script setup>
-	useHead({ title: 'Service' });
-	definePageMeta({ middleware: ['auth-office'], layout: 'office' });
     const { $api_office_queue_services } = useNuxtApp();
-    
+    const route = useRoute();
+	const current_slug = computed( () => route.params.slug );
+
     const queue_service_list = useState('queue_service_list', () => []);
     let data = {
         "status": "success",
@@ -240,10 +240,9 @@
     };
     queue_service_list.value = data.data;
 
-    const loader = ref(false);
     const load_services = async () => {
         if (queue_service_list.value.length > 0) return;
-        loader.value = true;
+        // loader.value = true;
         try{
             const getData = await $fetchOffice($api_office_queue_services, {
                 method: 'POST',
@@ -252,7 +251,7 @@
         } catch(e){
             console.log('Get Message',e.message);
         } finally {
-            loader.value = false;
+            // loader.value = false;
         }
     }
 
@@ -260,25 +259,24 @@
         // load_services();
     });
 </script>
-
 <template>
+    <!-- {{ current_slug }} -->
     <!-- <pre>{{ queue_service_list }}</pre> -->
-    <div class="my-8 w-full flex justify-center">
-        <div class="w-[90%] h-[100px] bg-[linear-gradient(90deg,_#FFF_0%,_#EDEDED_53%,_#FFF_100%)] flex items-center justify-center">
-            <h1 class="text-[54px] font-semibold text-gray-900 ">Select Service</h1>
-        </div>
-    </div>
-    <div class="overflow-auto h-[calc(100vh-240px)]">
-        <LoaderSpinkitBounceLoader v-if="loader"/>
-        <template v-else>
-            <div v-for="(item, index) in queue_service_list" :key="index" class="mt-16 flex justify-center">
-                <NuxtLink :to="'service/'+item.route">
-                    <div class="w-[500px] h-[288px] rounded-[20px] flex flex-col items-center justify-center" :style="{ backgroundColor:`#${item.color}` }">
-                        <i class="text-[#FFF] text-[54px]" :class="item.icon"></i>
-                        <h1 class="text-white text-[54px] font-semibold">{{ item.name }}</h1>
+    <div>
+        <div class="bg-[#D4E7DF] h-full w-[300px] py-3 overflow-auto">
+            <div class="text-[#4D5155] text-[22px] font-medium leading-[normal] mr-3"
+                :class="current_slug == item.route ? 'rounded-tl-none rounded-br-[40px] rounded-tr-[40px] rounded-bl-none bg-[#FFF]' : ''"
+                v-for="(item, index) in queue_service_list" :key="index">
+                <NuxtLink :to="item.route">
+                    <div class="flex items-center">
+                        <span v-if="current_slug == item.route" class="w-[6px] h-[40px] ml-2 border-[#0083C4] border-[3px] rounded-xl"></span>
+                        <div class="p-4">
+                            <i class="text-[22px] pr-3" :class="[item.icon, current_slug == item.route ? 'text-[#0083C4]' : 'text-[#4D5155] ']"></i>
+                            <span class="text-[#4D5155] text-[22px]">{{ item.name }}</span>
+                        </div>
                     </div>
                 </NuxtLink>
             </div>
-        </template>
+        </div>
     </div>
 </template>

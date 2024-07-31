@@ -7,7 +7,13 @@ export default defineNuxtConfig({
 			API_URL_AGENT: process.env.API_URL_AGENT,
 		}
 	},
-
+	app: {
+		head: {
+			link: [
+				{ rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' },
+			],
+		}
+	},
 	// css: ['@/assets/tailwindcss.css'],
 	css: [
 		'~/assets/css/main.css',

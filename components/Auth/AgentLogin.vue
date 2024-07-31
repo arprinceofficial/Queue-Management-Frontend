@@ -10,8 +10,8 @@
 	}
 
 	const form = reactive({
-		loginInput: 'ashiqurr04@gmail.com',
-		password: '12345678'
+		email: '',
+		password: ''
 	});
 
 	const unauthorizedError = ref('');
@@ -58,19 +58,19 @@
 							<h2 class="mt-2 text-center text-[22px] font-bold tracking-tight text-gray-900 dark:text-gray-200">
 								Queue Management</h2>
 							<div class="mt-10">
-								<InputLabel for="loginInput" value="User ID" class="text-[14px] mb-2" />
+								<InputLabel for="email" value="User ID" class="text-[14px] mb-2" />
 								<div class="relative mt-1">
 									<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
 										<UserIcon class="h-4 w-4 text-gray-400" aria-hidden="true" />
 									</div>
 									<InputText
-										id="loginInput"
+										id="email"
 										type="text"
 										class="pl-[10px] h-[40px] sm:text-sm text-[14px] pl-[40px]"
-										v-model="form.loginInput"
+										v-model="form.email"
 										required
 										autofocus
-										autocomplete="loginInput" 
+										autocomplete="email" 
 										placeholder="i.e. 2324I245986789"/>
 								</div>
 								<InputError class="mt-2" :message="unauthorizedError" />
