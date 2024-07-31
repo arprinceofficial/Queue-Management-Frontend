@@ -1,7 +1,9 @@
+// api endpoint
 const LOGIN = '/login';
 const LOGOUT = '/logout';
-const CURRENT_USER = '/info';
+const CURRENT_USER = '/current-user';
 
+// Value is initialized in: ~/plugins/authOffice.ts
 export const officeUser = () => {
 	return useState('office_user', () => undefined);
 };
@@ -16,13 +18,13 @@ export const officeAuth = () => {
 		if (isOfficeLoggedIn.value) return;
 
 		const response: any = await $fetchOffice(LOGIN, { method: 'post', body: credentials });
-		cookie.value = response.data?.token;
+		cookie.value = response.data?.access_token;
 		return response;
 	}
 
 	async function logout() {
 		if (!isOfficeLoggedIn.value) return;
-		$fetchOffice(LOGOUT, { method: 'get' });
+		$fetchOffice(LOGOUT, { method: 'post', body: { id: office_user.value?.data?.user?.id } });
 		office_user.value = null;
 		cookie.value = null;
 		await router.push('/');

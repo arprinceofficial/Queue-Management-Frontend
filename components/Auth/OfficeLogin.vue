@@ -10,7 +10,7 @@
 	}
 
 	const form = reactive({
-		email: '',
+		loginInput: '',
 		password: ''
 	});
 
@@ -49,19 +49,19 @@
 			</div>
 			<form @submit.prevent="submit" class="mt-24">
 				<div class="mt-10">
-					<InputLabel for="email" value="User ID" class="text-[25px] mb-6" />
+					<InputLabel for="loginInput" value="User ID" class="text-[25px] mb-6" />
 					<div class="relative mt-1">
 						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-8">
 							<UserIcon class="h-8 w-8 text-gray-400" aria-hidden="true" />
 						</div>
 						<InputText
-							id="email"
+							id="loginInput"
 							type="text"
 							class="pl-[80px] h-[72px] sm:text-xl text-[20px] rounded-[50px]"
-							v-model="form.email"
+							v-model="form.loginInput"
 							required
 							autofocus
-							autocomplete="email" 
+							autocomplete="loginInput" 
 							placeholder="i.e. 2324I245986789"/>
 					</div>
 					<InputError class="mt-2" :message="unauthorizedError" />
