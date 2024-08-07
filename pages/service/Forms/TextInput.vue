@@ -1,6 +1,5 @@
 <script setup>
     const { office_user } = officeAuth();
-    const { $defaultCountryCode } = useNuxtApp();
     const props = defineProps({
         data: Object,
         preview_mode: Boolean,
@@ -17,8 +16,7 @@
         </div>
         <div v-if="!preview_mode" class="flex">
             <span v-if="data.type == 'number'" class="flex items-center h-[72px] sm:text-xl text-[20px] rounded-lg px-3 mr-3  mt-1 border-[2px] border-green-500 rounded-lg">
-                <!-- {{ office_user.country_code }} -->
-                  {{ $defaultCountryCode }}
+                {{ office_user.country_code }}
             </span>
             <InputText
                 :type="data.type"

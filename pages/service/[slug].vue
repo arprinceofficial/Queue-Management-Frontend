@@ -15,105 +15,8 @@
 		.map(word => word.charAt(0).toUpperCase() + word.slice(1))
 		.join(' ')
 	});
-	// const queue_service = ref({});
-	const queue_service = ref({
-		"id": 1,
-		"name": "Inquiry",
-		"icon": "far fa-messages-question",
-		"slug": "inquiry",
-		"route": "inquiry",
-		"color": "0083C4",
-		"fields": [
-			{
-				"label": "Name",
-				"name": "name",
-				"type": "text",
-				"place_holder": "i.e John doe",
-				"required": true,
-				"id": 0,
-				"value": ""
-			},
-			{
-				"label": "Email",
-				"name": "email",
-				"type": "email",
-				"place_holder": "i.e example@xyz.com",
-				"required": true,
-				"id": 1,
-				"value": ""
-			},
-			{
-				"label": "Mobile",
-				"name": "mobile",
-				"type": "number",
-				"place_holder": "i.e +63-2-1234-5678",
-				"required": false,
-				"id": 2,
-				"value": ""
-			},
-			{
-				"label": "Gender",
-				"name": "gender",
-				"type": "radio",
-				"data_type": "static",
-				"options": [
-					{
-						"id": 1,
-						"name": "Male"
-					},
-					{
-						"id": 2,
-						"name": "Female"
-					}
-				],
-				"required": true,
-				"id": 3,
-				"value": ""
-			},
-			{
-				"label": "Service",
-				"name": "service",
-				"type": "radio",
-				"data_type": "static",
-				"options": [
-					{
-						"id": 21,
-						"name": "Grievance Redress Service"
-					},
-					{
-						"id": 2,
-						"name": "Certificate of Live Birth (COLB)"
-					},
-					{
-						"id": 1,
-						"name": "Business Permit Registration and Renewal"
-					}
-				],
-				"required": true,
-				"id": 4,
-				"value": ""
-			},
-			{
-				"label": "Priority lane",
-				"name": "priority_lane",
-				"type": "radio",
-				"data_type": "dunamic",
-				"options": [
-					{
-						"id": 1,
-						"name": "Regular"
-					},
-					{
-						"id": 2,
-						"name": "PWD/Pregnant/IP"
-					}
-				],
-				"required": true,
-				"id": 5,
-				"value": ""
-			}
-		]
-	});
+	
+	const queue_service = ref({});
 	const loader = ref(false);
     const load_services = async () => {
 		loader.value = true;
@@ -126,7 +29,7 @@
 				item.value = '';
 				return getData.data;
 			});
-			// queue_service.value = data[0];
+			queue_service.value = data[0];
         } catch(e){
             console.log('Get Message', e.message);
         } finally {
@@ -135,7 +38,7 @@
     }
 
     onMounted(async () => {
-        // load_services();
+        load_services();
     });
 
 	const updateForm = (data) => {
@@ -182,21 +85,21 @@
 
 	const is_submit_loading = ref(false);
 	const generateToken = async () => {
-		console.log(forms.value);
+		// console.log(forms.value);
 		// ++cur_step.value;
 		// setTimeout(() => { router.push('/service'); }, 3000);
 
 		is_submit_loading.value = true;
         try{
-            // const getData = await $fetchOffice(`${$api_office_queue_vouchers_store}`, {
-            //     method: 'POST',
-			// 	body: forms.value
-            // });
-			// console.log(getData);
-			// if(getData.status == true){
+            const getData = await $fetchOffice(`${$api_office_queue_vouchers_store}`, {
+                method: 'POST',
+				body: forms.value
+            });
+			console.log(getData);
+			if(getData.status == true){
 				++cur_step.value;
 				setTimeout(() => { router.push('/service'); }, 3000);
-			// }
+			}
         } catch(e){
             console.log('Get Message', e.message);
         } finally {

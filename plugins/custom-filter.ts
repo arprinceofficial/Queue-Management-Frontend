@@ -355,13 +355,25 @@ export default defineNuxtPlugin(() => {
                 }
                 return short_code;
             },
+            formatTime: (date: any) => {
+                const d = new Date(date)
+                return `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
+            },
             formatDate: (date: any) => {
                 const d = new Date(date)
                 return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
             },
             formatDateTime: (date: any) => {
                 const d = new Date(date)
-                return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
+                return `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}, ${d.getHours()}:${d.getMinutes()}`
+            },
+            formatDateTimeHour: (date: any) => {
+                const d = new Date(date);
+                const hours = d.getHours();
+                const minutes = d.getMinutes();
+                const amOrPm = hours >= 12 ? 'PM' : 'AM';
+                const formattedHours = hours % 12 || 12;
+                return `${d.getDate()}-${d.getMonth() + 1}-${d.getFullYear()}, ${formattedHours}:${minutes.toString().padStart(2, '0')} ${amOrPm}`;
             },
             defaultCountryCode: '+63',
         }
