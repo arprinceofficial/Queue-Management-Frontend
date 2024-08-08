@@ -8,9 +8,9 @@ export default defineNuxtPlugin(() => {
 
             // Agent API Endpoints
             api_agent_info: 'info',
-            api_agent_queue_counters_get_counter: 'queue-counters/get-counter',
-            api_agent_queue_counters_set_counter: 'queue-counters/set-counter',
-            api_agent_queue_counters_revoke_counter: 'queue-counters/revoke-counter',
+            api_agent_queue_counters_get_counter: 'get-counter',
+            api_agent_queue_counters_set_counter: 'set-counter',
+            api_agent_queue_counters_revoke_counter: 'revoke-counter',
             api_agent_queue_vouchers_get_waitinglist: 'queue-vouchers/get-waitinglist',
             api_agent_queue_vouchers_reserve_queue: 'queue-vouchers/reserve-queue',
             api_agent_queue_vouchers_get_reserve_queue: 'queue-vouchers/get-reserve-queue',

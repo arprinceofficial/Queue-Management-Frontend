@@ -1,8 +1,8 @@
 API_URL_OFFICE="http://localhost:4000/api/office/"
-API_URL_AGENT="http://localhost:4000/api/"
+API_URL_AGENT="http://localhost:4000/api/agent/"
 
 API_URL_OFFICE="https://backend-queue.arprince.me/api/office/"
-API_URL_AGENT="https://backend-queue.arprince.me/api/"
+API_URL_AGENT="https://backend-queue.arprince.me/api/agent/"
 
 API_URL_OFFICE="https://api-dev.ph.orangebd.com/api/queue-offices/"
 API_URL_AGENT="https://api-dev.ph.orangebd.com/api/queue-agents/"

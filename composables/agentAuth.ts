@@ -24,7 +24,7 @@ export const agentAuth = () => {
 
 	async function logout() {
 		if (!isAgentLoggedIn.value) return;
-		$fetchAgent(LOGOUT, { method: 'post', body: { id: agent_user.value?.data?.user?.id } });
+		$fetchAgent(LOGOUT, { method: 'GET' });
 		agent_user.value = null;
 		cookie.value = null;
 		await router.push('/agent-login');

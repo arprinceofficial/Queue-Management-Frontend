@@ -24,7 +24,7 @@ export const officeAuth = () => {
 
 	async function logout() {
 		if (!isOfficeLoggedIn.value) return;
-		$fetchOffice(LOGOUT, { method: 'post', body: { id: office_user.value?.data?.user?.id } });
+		$fetchOffice(LOGOUT, { method: 'GET' });
 		office_user.value = null;
 		cookie.value = null;
 		await router.push('/');
