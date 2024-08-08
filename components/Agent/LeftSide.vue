@@ -138,15 +138,20 @@
         text.value = 'Calling Token Number ' + token + ' Counter ' + counter;
         play()
     }
+
+    const is_load_reg = ref(false);
+    const registration = () => {
+        is_load_reg.value = true;
+    }
+    const citizenData = (data) => {
+        console.log('data', data);
+        is_load_reg.value = false;
+    }
 </script>
 <template>
     <div class="md:w-1/2 w-full h-full flex justify-center bg-[#DFEFE8]">
-        <!-- {{ get_token_id }} -->
-          <!-- {{ get_reserve_queue }} -->
-          <!-- {{ get_reserve_queue.id }} -->
         <LoaderSpinkitBounceLoader v-if="loader" class="w-full"/>
         <div v-else class="p-2 w-full flex flex-col items-center justify-between">
-            <!-- <pre>{{ get_reserve_queue }}</pre> -->
             <template v-if="get_reserve_queue.length == 0">
                 <div class="flex items-center justify-center h-full">
                     <p class="text-[20px] md:text-[25px] font-semibold">
@@ -155,6 +160,9 @@
                 </div>
             </template>
             <template v-else>
+                <!-- <pre>{{ get_reserve_queue.citizen_info }}</pre> -->
+                <!-- {{ get_token_id }} -->
+                <!-- {{ get_reserve_queue.id }} -->
                 <!-- {{ text }} -->
                 <div class="flex flex-col items-center overflow-auto w-full">
                     <p class="text-[18px] sm:text-[20px] md:text-[30px] text-[#00B076] text-center font-semibold pt-3">Currently Serving</p>
@@ -197,7 +205,6 @@
                                 <div class="w-full h-full flex justify-center">
                                     <div class="m-2 w-full flex items-center justify-center">
                                         <div class="flex md:flex-nowrap flex-wrap w-full h-full gap-2">
-                                            
                                             <ButtonSecondary 
                                                 :name="'Start'"
                                                 :border="true" 
@@ -209,10 +216,16 @@
                                                 class="md:mt-0 mt-4"
                                                 @click="playText"
                                             />
-                                            <ButtonSecondary 
+                                            <ButtonSecondary v-if="!get_reserve_queue?.citizen_info"
                                                 :name="'Complete'" 
                                                 class="md:mt-0 mt-4"
                                                 @click="get_reserve_queue.length > 0 || is_start_task ? completeTask() : ''" 
+                                                :disabled="get_reserve_queue.length == 0 || !is_start_task" 
+                                            />
+                                            <ButtonSecondary v-if="get_reserve_queue?.citizen_info"
+                                                :name="'Registration'" 
+                                                class="md:mt-0 mt-4"
+                                                @click="get_reserve_queue.length > 0 || is_start_task ? registration() : ''" 
                                                 :disabled="get_reserve_queue.length == 0 || !is_start_task" 
                                             />
                                         </div>
@@ -225,5 +238,6 @@
             </template>
         </div>
         <LoaderModalSpin :isOpen="is_loading" />
+        <OfficeRegistration :isOpen="is_load_reg" @citizen_data="citizenData" />
     </div>
 </template>
