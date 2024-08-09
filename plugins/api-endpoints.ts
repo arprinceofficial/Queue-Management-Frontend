@@ -4,7 +4,7 @@ export default defineNuxtPlugin(() => {
             // Office API Endpoints
             api_office_queue_services: 'queue-services', // Done
             api_office_queue_vouchers_store :'queue-services-create', // Done
-            api_office_queue_vouchers_waiting_screen: 'queue-vouchers/waiting-screen',
+            api_office_queue_vouchers_waiting_screen: 'queue-token/waiting-screen', // Done
 
             // Agent API Endpoints
             api_agent_info: 'current-user', // Done
