@@ -22,7 +22,7 @@
     });
 </script>
 <template>
-    <!-- <pre>{{ agent_user }}</pre> -->
+    <!-- <pre>{{ agent_user.data.office }}</pre> -->
     <nav class="h-[75px] dark:bg-gray-800 dark:bg-[linear-gradient(to_right,#333333,#000000)] bg-[#F1F6FF] border-b border-gray-100 dark:border-gray-700 z-[60] top-0">
         <!-- Primary Navigation Menu -->
         <div class="mx-auto px-4 sm:px-6 lg:px-8 h-full">

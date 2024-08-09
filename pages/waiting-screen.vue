@@ -46,8 +46,10 @@
         const yt_id = link.split('v=')[1];
         return 'https://www.youtube.com/embed/' + yt_id+'?autoplay=1&loop=1&playlist='+yt_id;
     }
+    const { office_user } = officeAuth();
 </script>
 <template>
+    <!-- <pre>{{ office_user.data.office }}</pre> -->
     <!-- {{ waiting_list.contentData[0].video_url }} -->
     <!-- <pre>{{ waiting_list }}</pre> -->
     <div class="h-screen flex flex-col items-center">
