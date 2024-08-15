@@ -35,9 +35,19 @@
             console.log('Get Message', e.message);
         }
     }
-    setInterval(() => {
-        refreshWaitingList();
-    }, 5000);
+    // setInterval(() => {
+    //     refreshWaitingList();
+    // }, 5000);
+    import { io } from 'socket.io-client';
+    const api_base_url = useRuntimeConfig().public.API_BASE_URL;
+    // const socket_data = ref('');
+    onMounted(() => {
+        const socket = io(api_base_url);
+        socket.on('updateWaitingList', (data) => {
+            // socket_data.value = data;
+            refreshWaitingList();
+        });
+    });
 
     // const youtube_link = 'https://www.youtube.com/watch?v=6vlqPpMW1C0';
     // const yt_id = youtube_link.split('v=')[1];

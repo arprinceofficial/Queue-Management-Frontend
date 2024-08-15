@@ -51,10 +51,19 @@
             console.log('Get Message', e.message);
         }
     }
-    setInterval(() => {
-        refreshWaitingList();
-    }, 5000);
-    
+    // setInterval(() => {
+    //     refreshWaitingList();
+    // }, 5000);
+    import { io } from 'socket.io-client';
+    const api_base_url = useRuntimeConfig().public.API_BASE_URL;
+    // const socket_data = ref('');
+    onMounted(() => {
+        const socket = io(api_base_url);
+        socket.on('updateWaitingList', (data) => {
+            // socket_data.value = data;
+            refreshWaitingList();
+        });
+    });
     
     const is_loading = ref(false);
     
@@ -98,6 +107,7 @@
             <div class="w-full px-5 py-[12px] bg-[#F2E5C5]">
                 <p class="text-[20px] md:text-[25px] font-semibold">
                     Waiting 
+                    <!-- <pre>{{ socket_data }}</pre> -->
                     <!-- {{ get_token_id }}  -->
                     <!-- <pre>{{ get_reserve_queue.token }}</pre> -->
                 </p>
