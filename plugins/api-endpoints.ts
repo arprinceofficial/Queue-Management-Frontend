@@ -17,6 +17,7 @@ export default defineNuxtPlugin(() => {
             api_agent_queue_vouchers_complete_queue: 'complete-queue', // Done
             api_agent_queue_counters_get_online_counter: 'get-online-counter', // Done
             api_agent_queue_vouchers_tranfer_queue: 'tranfer-queue', // Done
+            api_agent_queue_vouchers_reject_queue: 'cancel-queue', // Done
         }
     };
 });

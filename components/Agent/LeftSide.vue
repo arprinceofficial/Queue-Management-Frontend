@@ -1,7 +1,8 @@
 <script setup>
     const { 
         $api_agent_queue_vouchers_get_reserve_queue,
-        $api_agent_queue_vouchers_complete_queue
+        $api_agent_queue_vouchers_complete_queue,
+        $api_agent_queue_vouchers_reject_queue,
     } = useNuxtApp();
 
     const get_reserve_queue = useState('get_reserve_queue', () => []);
@@ -147,6 +148,27 @@
         console.log('data', data);
         is_load_reg.value = false;
     }
+
+    const rejectTask = async () => {
+        try {
+            is_loading.value = true;
+            const getData = await $fetchAgent($api_agent_queue_vouchers_reject_queue, {
+                method: 'POST',
+                body: {
+                    id: get_reserve_queue.value.id,
+                }
+            });
+            if (getData.status == true) {
+                get_reserve_queue.value = [];
+                get_token_id.value = '';
+                stopTimer();
+            }
+        } catch (e) {
+            console.log('Get Message', e.message);
+        } finally {
+            is_loading.value = false;
+        }
+    }
 </script>
 <template>
     <div class="md:w-1/2 w-full h-full flex justify-center bg-[#DFEFE8]">
@@ -216,17 +238,23 @@
                                                 class="md:mt-0 mt-4"
                                                 @click="playText"
                                             />
-                                            <ButtonSecondary v-if="!get_reserve_queue?.citizen_info"
+                                            <ButtonSecondary v-if="!get_reserve_queue?.citizen_info && is_start_task"
                                                 :name="'Complete'" 
                                                 class="md:mt-0 mt-4"
                                                 @click="get_reserve_queue.length > 0 || is_start_task ? completeTask() : ''" 
                                                 :disabled="get_reserve_queue.length == 0 || !is_start_task" 
                                             />
-                                            <ButtonSecondary v-if="get_reserve_queue?.citizen_info"
+                                            <ButtonSecondary v-if="get_reserve_queue?.citizen_info && is_start_task"
                                                 :name="'Registration'" 
                                                 class="md:mt-0 mt-4"
                                                 @click="get_reserve_queue.length > 0 || is_start_task ? registration() : ''" 
                                                 :disabled="get_reserve_queue.length == 0 || !is_start_task" 
+                                            />
+                                            <ButtonSecondary v-if="!is_start_task"
+                                                :name="'Reject'" 
+                                                class="md:mt-0 mt-4 bg-[#FF0000] hover:bg-[#FF0000]"
+                                                @click="!is_start_task ? rejectTask() : ''" 
+                                                :disabled="is_start_task" 
                                             />
                                         </div>
                                     </div>
