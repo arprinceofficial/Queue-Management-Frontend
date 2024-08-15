@@ -35,10 +35,33 @@
         loadReserveQueue();
     });
 
-    setInterval(() => {
-        load_current_user();
-        loadReserveQueue();
-    }, 5000);
+    // setInterval(() => {
+    //     load_current_user();
+    //     loadReserveQueue();
+    // }, 5000);
+    import { io } from 'socket.io-client';
+    const api_base_url = useRuntimeConfig().public.API_BASE_URL;
+    onMounted(() => {
+        const socket = io(api_base_url);
+        socket.on('reserveQueue', (data) => {
+            loadReserveQueue();
+        });
+        socket.on('cancelQueue', (data) => {
+            loadReserveQueue();
+        });
+        socket.on('completeQueue', (data) => {
+            loadReserveQueue();
+        });
+        socket.on('transferQueue', (data) => {
+            loadReserveQueue();
+        });
+        socket.on('logout', (data) => {
+            agent_user.value = {};
+        });
+        socket.on('setCounter', (data) => {
+            load_current_user();
+        });
+    });
 </script>
 <template>
     <!-- get_reserve_queue: <pre>{{ get_reserve_queue }}</pre> -->
