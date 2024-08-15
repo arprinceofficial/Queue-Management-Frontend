@@ -63,6 +63,9 @@
             // socket_data.value = data;
             refreshWaitingList();
         });
+        socket.on('transferQueue', (data) => {
+            refreshWaitingList();
+        });
     });
     
     const is_loading = ref(false);
