@@ -40,11 +40,21 @@
     // }, 5000);
     import { io } from 'socket.io-client';
     const api_base_url = useRuntimeConfig().public.API_BASE_URL;
-    // const socket_data = ref('');
     onMounted(() => {
         const socket = io(api_base_url);
-        socket.on('updateWaitingList', (data) => {
-            // socket_data.value = data;
+        socket.on('createQueueToken', (data) => {
+            refreshWaitingList();
+        });
+        socket.on('reserveQueue', (data) => {
+            refreshWaitingList();
+        });
+        socket.on('cancelQueue', (data) => {
+            refreshWaitingList();
+        });
+        socket.on('completeQueue', (data) => {
+            refreshWaitingList();
+        });
+        socket.on('transferQueue', (data) => {
             refreshWaitingList();
         });
     });

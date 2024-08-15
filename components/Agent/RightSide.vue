@@ -59,7 +59,7 @@
     // const socket_data = ref('');
     onMounted(() => {
         const socket = io(api_base_url);
-        socket.on('updateWaitingList', (data) => {
+        socket.on('createQueueToken', (data) => {
             // socket_data.value = data;
             refreshWaitingList();
         });
