@@ -136,7 +136,7 @@
         token = token.trim();
         
         let counter = agent_user.value.data.queue_counter.counter_number;
-        text.value = 'Calling Token Number ' + token + ' Counter ' + counter;
+        text.value = 'Token Number ' + token + ' Counter ' + counter;
         play()
     }
 
