@@ -10,9 +10,6 @@ export default defineNuxtPlugin(() => {
             baseUrl: () => {
                 return config.public.BASE_URL
             },
-            baseApiUrl: () => {
-                return config.public.API_URL
-            },
             validateDate: (date: any) => {                
                 const re = /^(\d{4})-(\d{1,2})-(\d{1,2})$/
                 return re.test(date)
