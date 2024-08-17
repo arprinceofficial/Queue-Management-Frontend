@@ -41,7 +41,7 @@
                         <div class="p-4">
                             <div class="custom_table overflow-auto border-b border-gray-200">
                                 <table class="table border table-auto">
-                                    <thead class="sticky z-50 top-0">
+                                    <thead class="sticky z-10 top-0">
                                         <tr>
                                             <!-- <th class="" width="10%">
                                                 <div class="flex flex-row items-center justify-center gap-2">
