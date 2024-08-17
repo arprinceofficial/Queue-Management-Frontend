@@ -1,0 +1,33 @@
+/**
+ * CUSTOM TABLE STYLES
+ */
+ .custom_table {
+	display: block;
+	width: 100%;
+	overflow-x: auto;
+
+	table {
+		width: 100%;
+
+		tr {
+
+			th,
+			td {
+				background-color: #eaeaea;
+				padding: 8px 12px;
+				border: 1px solid #ddd;
+
+				&>div>i {
+					color: #0f8051
+				}
+			}
+
+			td {
+				background-color: #fff;
+				// &:first-child{
+				//     background-color: #fdf4bd;
+				// }                    
+			}
+		}
+	}
+}

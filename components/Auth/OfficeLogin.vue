@@ -41,7 +41,7 @@
 			<div>
 				<div class="flex flex-col justify-center items-center">
 					<!-- <NuxtLink to="/"> -->
-					<ApplicationLogo :width="'404px'" :height="'121px'" />
+					<ApplicationLogo :width="'200px'" :height="'121px'" />
 					<!-- </NuxtLink> -->
 					<h2 class="mt-6 text-center text-[64px] font-bold tracking-tight text-gray-900 dark:text-gray-200 mt-[80px]">
 						Login</h2>

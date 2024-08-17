@@ -120,3 +120,4 @@ const admin_user = useState('admin_user')
         </div>
     </div>
 </template>
+<style lang="scss" scoped></style>

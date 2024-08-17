@@ -49,7 +49,7 @@
 						<div>
 							<div class="flex flex-col justify-center items-center">
 								<!-- <NuxtLink to="/"> -->
-								<ApplicationLogo :width="'280px'" :height="'100%'" />
+								<ApplicationLogo :width="'120px'" :height="'100%'" />
 								<!-- </NuxtLink> -->
 								
 							</div>

@@ -31,7 +31,7 @@
                     <!-- Logo -->
                     <div class="shrink-0 flex items-center">
                         <NuxtLink href="/">
-                            <ApplicationLogo :width="'180px'" :height="'100%'" />
+                            <ApplicationLogo :width="'50px'" :height="'100%'" />
                         </NuxtLink>
                     </div>
                 </div>
