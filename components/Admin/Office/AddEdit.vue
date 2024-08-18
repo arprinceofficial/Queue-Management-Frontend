@@ -7,10 +7,9 @@
         DialogTitle,
     } from '@headlessui/vue'
 
-    const { 
-        $api_admin_office_list,
-        $api_admin_counter_create,
-        $api_admin_counter_update,
+    const {
+        $api_admin_office_create,
+        $api_admin_office_update,
     } = useNuxtApp();
 
     const props = defineProps({
@@ -28,27 +27,14 @@
     
 
     const formData = ref({
-        title: '',
-        counter_number: '',
-        office_id: '',
+        office_name: '',
         status: 0,
     });
     
-    const resetForm = () => {
-        formData.value = {
-            title: '',
-            counter_number: '',
-            office_id: '',
-            status: 0,
-        };
-    }
-
     watch(() => props.data, (value) => {
         if (value) {
             formData.value = {
-                title: value.title,
-                counter_number: value.counter_number,
-                office_id: value.office?.id,
+                office_name: value.office_name,
                 status: value.status,
             };
             isChecked.value = value.status == 1 ? true : false;
@@ -61,22 +47,6 @@
         formData.value.status = isChecked.value ? 1 : 0;
     }
 
-    const admin_office_list = useState('admin_office_list', () => []);
-    const loadOfficeList = async () => {
-        try{
-            const getData = await $fetchAdmin($api_admin_office_list, {
-                method: 'GET',
-            });
-            admin_office_list.value = getData.data;
-        } catch(e){
-            console.log('Get Message',e.message);
-        }
-    }
-
-    onMounted(() => {
-        loadOfficeList();
-    });
-
     const emit = defineEmits(['add_counter', 'cancel']);
     const is_loading = ref(false);
     const createCounter = async () => {
@@ -84,13 +54,12 @@
         // formData.value.id = getData.data.id;
         try{
             is_loading.value = true;
-            const getData = await $fetchAdmin($api_admin_counter_create, {
+            const getData = await $fetchAdmin($api_admin_office_create, {
                 method: 'POST',
                 body: formData.value,
             });
             if(getData.status == true){
                 emit('add_counter', getData.data);
-                // resetForm();
             }
         } catch(e){
             console.log('Get Message',e.message);
@@ -103,13 +72,12 @@
         try{
             is_loading.value = true;
             formData.value.id = props.data.id;
-            const getData = await $fetchAdmin($api_admin_counter_update, {
+            const getData = await $fetchAdmin($api_admin_office_update, {
                 method: 'POST',
                 body: formData.value,
             });
             if(getData.status == true){
                 emit('add_counter', getData.data);
-                // resetForm();
             }
         } catch(e){
             console.log('Get Message',e.message);
@@ -134,33 +102,17 @@
                         <DialogPanel
                             class="w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                             <DialogTitle as="h3" class="text-lg text-center font-bold leading-6 text-gray-900">
-                                {{ title }} Counter
+                                {{ title }} Office
                             </DialogTitle>
                             <div class="mt-2">
                                 <!-- <pre>{{ data }}</pre> -->
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
                                     <div class="">
-                                        <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
-                                        <input type="text" name="title" id="title" v-model="formData.title"
+                                        <label for="office_name"
+                                            class="block text-sm font-medium text-gray-700">Office Name</label>
+                                        <input type="text" name="office_name" id="office_name"
+                                            v-model="formData.office_name"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                    </div>
-                                    <div class="">
-                                        <label for="counter_number"
-                                            class="block text-sm font-medium text-gray-700">Counter Number</label>
-                                        <input type="text" name="counter_number" id="counter_number"
-                                            v-model="formData.counter_number"
-                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                    </div>
-                                    <div class="">
-                                        <label for="office_id"
-                                            class="block text-sm font-medium text-gray-700">Office</label>
-                                        <select id="office_id" name="office_id" v-model="formData.office_id"
-                                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                                            <option value="">Select Office</option>
-                                            <option v-for="(item, index) in admin_office_list" :key="index"
-                                                :value="item.id">{{ item.office_name }}
-                                            </option>
-                                        </select>
                                     </div>
                                     <div class="flex items-end">
                                         <div class="flex items-center gap-4">

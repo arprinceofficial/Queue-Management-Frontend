@@ -9,7 +9,6 @@
     const loader = ref(false);
     const admin_counter_list = useState('admin_counter_list', () => []);
     const loadCounterList = async () => {
-        if (admin_counter_list.value.length > 0) return;
         loader.value = true;
         try{
             const getData = await $fetchAdmin($api_admin_counter_list, {
