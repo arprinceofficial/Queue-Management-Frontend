@@ -30,6 +30,11 @@ export default defineNuxtPlugin(() => {
             api_admin_counter_create: 'counter-create',
             api_admin_counter_update: 'counter-update',
             api_admin_counter_delete: 'counter-delete',
+            
+            api_admin_priority_list: 'priority-list',
+            api_admin_priority_create: 'priority-create',
+            api_admin_priority_update: 'priority-update',
+            api_admin_priority_delete: 'priority-delete',
         }
     };
 });

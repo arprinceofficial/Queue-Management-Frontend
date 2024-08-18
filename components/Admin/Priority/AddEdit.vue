@@ -8,8 +8,8 @@
     } from '@headlessui/vue'
 
     const {
-        $api_admin_office_create,
-        $api_admin_office_update,
+        $api_admin_priority_create,
+        $api_admin_priority_update,
     } = useNuxtApp();
 
     const props = defineProps({
@@ -27,14 +27,16 @@
     
 
     const formData = ref({
-        office_name: '',
+        name: '',
+        short_name: '',
         status: 0,
     });
     
     watch(() => props.data, (value) => {
         if (value) {
             formData.value = {
-                office_name: value.office_name,
+                name: value.name,
+                short_name: value.short_name,
                 status: value.status,
             };
             isChecked.value = value.status == 1 ? true : false;
@@ -47,19 +49,19 @@
         formData.value.status = isChecked.value ? 1 : 0;
     }
 
-    const emit = defineEmits(['add_office', 'cancel']);
+    const emit = defineEmits(['add_priority', 'cancel']);
     const is_loading = ref(false);
-    const createOffice = async () => {
+    const createPriority = async () => {
         // console.log('Create Counter', getData.data);
         // formData.value.id = getData.data.id;
         try{
             is_loading.value = true;
-            const getData = await $fetchAdmin($api_admin_office_create, {
+            const getData = await $fetchAdmin($api_admin_priority_create, {
                 method: 'POST',
                 body: formData.value,
             });
             if(getData.status == true){
-                emit('add_office', getData.data);
+                emit('add_priority', getData.data);
             }
         } catch(e){
             console.log('Get Message',e.message);
@@ -67,17 +69,17 @@
             is_loading.value = false;
         }
     }
-    const updateOffice = async () => {
+    const updatePriority = async () => {
         // console.log('Update Counter', getData.data);
         try{
             is_loading.value = true;
             formData.value.id = props.data.id;
-            const getData = await $fetchAdmin($api_admin_office_update, {
+            const getData = await $fetchAdmin($api_admin_priority_update, {
                 method: 'POST',
                 body: formData.value,
             });
             if(getData.status == true){
-                emit('add_office', getData.data);
+                emit('add_priority', getData.data);
             }
         } catch(e){
             console.log('Get Message',e.message);
@@ -102,16 +104,23 @@
                         <DialogPanel
                             class="w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                             <DialogTitle as="h3" class="text-lg text-center font-bold leading-6 text-gray-900">
-                                {{ title }} Office
+                                {{ title }} Priority
                             </DialogTitle>
                             <div class="mt-2">
                                 <!-- <pre>{{ data }}</pre> -->
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
                                     <div class="">
-                                        <label for="office_name"
-                                            class="block text-sm font-medium text-gray-700">Office Name</label>
-                                        <input type="text" name="office_name" id="office_name"
-                                            v-model="formData.office_name"
+                                        <label for="name"
+                                            class="block text-sm font-medium text-gray-700">Priority Name</label>
+                                        <input type="text" name="name" id="name"
+                                            v-model="formData.name"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                    <div class="">
+                                        <label for="short_name"
+                                            class="block text-sm font-medium text-gray-700">Priority Name</label>
+                                        <input type="text" name="short_name" id="short_name"
+                                            v-model="formData.short_name"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                     </div>
                                     <div class="flex items-end">
@@ -140,7 +149,7 @@
                                 </button>
                                 <button type="button"
                                     class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ml-3"
-                                    @click="title == 'Add' ? createOffice() : updateOffice()">
+                                    @click="title == 'Add' ? createPriority() : updatePriority()">
                                     {{ title == 'Add' ? 'Create' : 'Update' }}
                                 </button>
                             </div>
