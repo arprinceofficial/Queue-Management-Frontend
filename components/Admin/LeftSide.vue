@@ -9,6 +9,7 @@
         { name: 'Counter', icon: 'fas fa-list-ol', route: '/admin-panel/counter' },
         { name: 'Office', icon: 'fas fa-building', route: '/admin-panel/office' },
         { name: 'Priority', icon: 'fas fa-sort-amount-up-alt', route: '/admin-panel/priority' },
+        { name: 'Gender', icon: 'fas fa-venus-mars', route: '/admin-panel/gender' },
         { name: 'WT Screen', icon: 'fas fa-tv', route: '/admin-panel/wt-screen' },
         { name: 'Office User', icon: 'fas fa-user', route: '/admin-panel/user-office' },
         { name: 'Agent User', icon: 'fas fa-user', route: '/admin-panel/user-agent' },

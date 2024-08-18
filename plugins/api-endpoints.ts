@@ -35,6 +35,11 @@ export default defineNuxtPlugin(() => {
             api_admin_priority_create: 'priority-create',
             api_admin_priority_update: 'priority-update',
             api_admin_priority_delete: 'priority-delete',
+            
+            api_admin_gender_list: 'gender-list',
+            api_admin_gender_create: 'gender-create',
+            api_admin_gender_update: 'gender-update',
+            api_admin_gender_delete: 'gender-delete',
         }
     };
 });
