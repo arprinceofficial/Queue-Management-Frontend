@@ -49,7 +49,7 @@
 
     const emit = defineEmits(['add_gender', 'cancel']);
     const is_loading = ref(false);
-    const createOffice = async () => {
+    const createGender = async () => {
         // console.log('Create Counter', getData.data);
         // formData.value.id = getData.data.id;
         try{
@@ -67,7 +67,7 @@
             is_loading.value = false;
         }
     }
-    const updateOffice = async () => {
+    const updateGender = async () => {
         // console.log('Update Counter', getData.data);
         try{
             is_loading.value = true;
@@ -102,14 +102,14 @@
                         <DialogPanel
                             class="w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                             <DialogTitle as="h3" class="text-lg text-center font-bold leading-6 text-gray-900">
-                                {{ title }} Office
+                                {{ title }} Gender
                             </DialogTitle>
                             <div class="mt-2">
                                 <!-- <pre>{{ data }}</pre> -->
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
                                     <div class="">
                                         <label for="name"
-                                            class="block text-sm font-medium text-gray-700">Office Name</label>
+                                            class="block text-sm font-medium text-gray-700">Gender Name</label>
                                         <input type="text" name="name" id="name"
                                             v-model="formData.name"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
@@ -140,7 +140,7 @@
                                 </button>
                                 <button type="button"
                                     class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ml-3"
-                                    @click="title == 'Add' ? createOffice() : updateOffice()">
+                                    @click="title == 'Add' ? createGender() : updateGender()">
                                     {{ title == 'Add' ? 'Create' : 'Update' }}
                                 </button>
                             </div>
