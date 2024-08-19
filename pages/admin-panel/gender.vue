@@ -29,9 +29,9 @@
     // Gender Add Edit Modal Handler
     const data = ref({});
     const modal_title = ref('');
-    const is_load_ofc = ref(false);
+    const is_open_modal = ref(false);
     const receivedData = (data) => {
-        is_load_ofc.value = false;
+        is_open_modal.value = false;
         console.log('Received Data', data);
 
         modal_title.value == 'Add' ? 
@@ -41,12 +41,12 @@
     const addGender = () => {
         data.value = {};
         modal_title.value = 'Add';
-        is_load_ofc.value = true;
+        is_open_modal.value = true;
     }
     const editGender = (item) => {
         data.value = item;
         modal_title.value = 'Edit';
-        is_load_ofc.value = true;
+        is_open_modal.value = true;
     }
 
     // Counter Delete Handler
@@ -68,6 +68,11 @@
         } finally {
             is_loading.value = false;
         }
+    }
+
+    const cancelModal = () => {
+        is_open_modal.value = false;
+        data.value = {};
     }
 </script>
 <template>
@@ -157,11 +162,11 @@
             </div>
         </div>
         <AdminGenderAddEdit 
-            :isOpen="is_load_ofc"
+            :isOpen="is_open_modal"
             :title="modal_title"
             :data="data"
             @add_gender="receivedData"
-            @cancel="is_load_ofc = false"
+            @cancel="cancelModal"
         />
         <LoaderModalSpin :isOpen="is_loading" />
     </div>

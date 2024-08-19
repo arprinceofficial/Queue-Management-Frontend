@@ -29,9 +29,9 @@
     // office user Add Edit Modal Handler
     const data = ref({});
     const modal_title = ref('');
-    const is_load_pty = ref(false);
+    const is_open_modal = ref(false);
     const receivedData = (data) => {
-        is_load_pty.value = false;
+        is_open_modal.value = false;
         console.log('Received Data', data);
 
         modal_title.value == 'Add' ? 
@@ -41,12 +41,12 @@
     const addOfficeUser = () => {
         data.value = {};
         modal_title.value = 'Add';
-        is_load_pty.value = true;
+        is_open_modal.value = true;
     }
     const editOfficeUser = (item) => {
         data.value = item;
         modal_title.value = 'Edit';
-        is_load_pty.value = true;
+        is_open_modal.value = true;
     }
 
     // Counter Delete Handler
@@ -68,6 +68,11 @@
         } finally {
             is_loading.value = false;
         }
+    }
+
+    const cancelModal = () => {
+        is_open_modal.value = false;
+        data.value = {};
     }
 </script>
 <template>
@@ -193,11 +198,11 @@
             </div>
         </div>
         <AdminOfficeUserAddEdit 
-            :isOpen="is_load_pty"
+            :isOpen="is_open_modal"
             :title="modal_title"
             :data="data"
             @add_OfficeUser="receivedData"
-            @cancel="is_load_pty = false"
+            @cancel="cancelModal"
         />
         <LoaderModalSpin :isOpen="is_loading" />
     </div>

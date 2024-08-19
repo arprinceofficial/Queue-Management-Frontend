@@ -169,9 +169,9 @@
                                             <label class="flex cursor-pointer select-none items-center">
                                                 <div class="relative">
                                                     <input type="checkbox" class="sr-only" @change="handleCheckboxChange" />
-                                                    <div class="block h-8 w-14 rounded-full bg-[#E5E7EB]"></div>
-                                                    <div :class="isChecked ? 'translate-x-full bg-blue-600' : 'bg-white'"
-                                                        class="dot absolute left-1 top-1 h-6 w-6 rounded-full bg-white transition">
+                                                    <div class="block h-8 w-14 rounded-full" :class="isChecked ? 'bg-green-200' : 'bg-gray-200'"></div>
+                                                    <div :class="isChecked ? 'translate-x-full bg-green-600' : 'bg-white'"
+                                                        class="dot absolute left-1 top-1 h-6 w-6 rounded-full transition">
                                                     </div>
                                                 </div>
                                             </label>
