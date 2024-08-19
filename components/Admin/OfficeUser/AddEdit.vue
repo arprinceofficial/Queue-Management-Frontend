@@ -8,8 +8,10 @@
     } from '@headlessui/vue'
 
     const {
-        $api_admin_OfficeUser_create,
-        $api_admin_OfficeUser_update,
+        $api_admin_office_user_create,
+        $api_admin_office_user_update,
+        $api_admin_office_list,
+        $api_admin_gender_list,
     } = useNuxtApp();
 
     const props = defineProps({
@@ -25,10 +27,46 @@
         },
     });
     
+    const admin_office_list = useState('admin_office_list', () => []);
+    const loadOfficeList = async () => {
+        // if(admin_office_list.value.length > 0) return;
+        try{
+            const getData = await $fetchAdmin($api_admin_office_list, {
+                method: 'GET',
+            });
+            admin_office_list.value = getData.data;
+        } catch(e){
+            console.log('Get Message',e.message);
+        }
+    }
+
+    const admin_gender_list = useState('admin_gender_list', () => []);
+    const loadGenderList = async () => {
+        try{
+            const getData = await $fetchAdmin($api_admin_gender_list, {
+                method: 'GET',
+            });
+            admin_gender_list.value = getData.data;
+        } catch(e){
+            console.log('Get Message',e.message);
+        }
+    }
+    
+
+    onMounted(() => {
+        loadOfficeList();
+        loadGenderList();
+    });
 
     const formData = ref({
         first_name: '',
         last_name: '',
+        mobile_number: '',
+        email: '',
+        password: '',
+        confirm_password: '',
+        office_id: '',
+        gender_id: '',
         status: 0,
     });
     
@@ -37,6 +75,11 @@
             formData.value = {
                 first_name: value.first_name,
                 last_name: value.last_name,
+                mobile_number: value.mobile_number,
+                email: value.email,
+                password: '',
+                office_id: value.office?.id,
+                gender_id: value.gender?.id,
                 status: value.status,
             };
             isChecked.value = value.status == 1 ? true : false;
@@ -52,11 +95,9 @@
     const emit = defineEmits(['add_OfficeUser', 'cancel']);
     const is_loading = ref(false);
     const createOfficeUser = async () => {
-        // console.log('Create Counter', getData.data);
-        // formData.value.id = getData.data.id;
         try{
             is_loading.value = true;
-            const getData = await $fetchAdmin($api_admin_OfficeUser_create, {
+            const getData = await $fetchAdmin($api_admin_office_user_create, {
                 method: 'POST',
                 body: formData.value,
             });
@@ -70,11 +111,10 @@
         }
     }
     const updateOfficeUser = async () => {
-        // console.log('Update Counter', getData.data);
         try{
             is_loading.value = true;
             formData.value.id = props.data.id;
-            const getData = await $fetchAdmin($api_admin_OfficeUser_update, {
+            const getData = await $fetchAdmin($api_admin_office_user_update, {
                 method: 'POST',
                 body: formData.value,
             });
@@ -122,6 +162,54 @@
                                         <input type="text" name="last_name" id="last_name"
                                             v-model="formData.last_name"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                    <div class="">
+                                        <label for="mobile_number"
+                                            class="block text-sm font-medium text-gray-700">Mobile Number</label>
+                                        <input type="text" name="mobile_number" id="mobile_number"
+                                            v-model="formData.mobile_number"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                    <div class="">
+                                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                                        <input type="email" name="email" id="email" v-model="formData.email"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                    <div class="">
+                                        <label for="password"
+                                            class="block text-sm font-medium text-gray-700">Password</label>
+                                        <input type="password" name="password" id="password"
+                                            v-model="formData.password"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                    <div class="">
+                                        <label for="confirm_password"
+                                            class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                                        <input type="password" name="confirm_password" id="confirm_password"
+                                            v-model="formData.confirm_password"
+                                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                    </div>
+                                    <div class="">
+                                        <label for="office_id"
+                                            class="block text-sm font-medium text-gray-700">Office</label>
+                                        <select id="office_id" name="office_id" v-model="formData.office_id"
+                                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                            <option value="">Select Office</option>
+                                            <option v-for="(item, index) in admin_office_list" :key="index"
+                                                :value="item.id">{{ item.office_name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="">
+                                        <label for="gender_id"
+                                            class="block text-sm font-medium text-gray-700">Office</label>
+                                        <select id="gender_id" name="gender_id" v-model="formData.gender_id"
+                                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                            <option value="">Select Office</option>
+                                            <option v-for="(item, index) in admin_gender_list" :key="index"
+                                                :value="item.id">{{ item.name }}
+                                            </option>
+                                        </select>
                                     </div>
                                     <div class="flex items-end">
                                         <div class="flex items-center gap-4">

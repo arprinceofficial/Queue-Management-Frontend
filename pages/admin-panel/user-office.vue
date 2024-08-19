@@ -26,7 +26,7 @@
         loadOfficeUserList();
     });
 
-    // Counter Add Edit Modal Handler
+    // office user Add Edit Modal Handler
     const data = ref({});
     const modal_title = ref('');
     const is_load_pty = ref(false);
