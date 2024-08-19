@@ -7,6 +7,3 @@ API_URL_ADMIN="https://backend-queue.arprince.me/api/admin/"
 API_URL_OFFICE="https://backend-queue.arprince.me/api/office/"
 API_URL_AGENT="https://backend-queue.arprince.me/api/agent/"
 API_BASE_URL="https://backend-queue.arprince.me"
-
-API_URL_OFFICE="https://api-dev.ph.orangebd.com/api/queue-offices/"
-API_URL_AGENT="https://api-dev.ph.orangebd.com/api/queue-agents/"
