@@ -67,6 +67,7 @@
         confirm_password: '',
         office_id: '',
         gender_id: '',
+        profile_image: '',
         status: 0,
     });
     
@@ -80,6 +81,7 @@
                 password: '',
                 office_id: value.office?.id,
                 gender_id: value.gender?.id,
+                profile_image: value.profile_image,
                 status: value.status,
             };
             isChecked.value = value.status == 1 ? true : false;
@@ -127,6 +129,10 @@
             is_loading.value = false;
         }
     }
+
+    const setPhoto = (photo) => {
+        formData.value.profile_image = photo;
+    }
 </script>
 <template>
     <TransitionRoot appear :show="isOpen" as="template">
@@ -147,6 +153,9 @@
                                 {{ title }} Office User
                             </DialogTitle>
                             <div class="mt-2">
+                                <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-6">
+                                    <PhotoBlockPhoto :getPhoto="formData.profile_image" @set_photo="setPhoto" />
+                                </div>
                                 <!-- <pre>{{ data }}</pre> -->
                                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
                                     <div class="">
