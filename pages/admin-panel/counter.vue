@@ -1,5 +1,5 @@
 <script setup>
-    useHead({ title: 'Admin Panel' });
+    useHead({ title: 'Admin | Counter' });
     definePageMeta({ middleware: ['auth-admin'], layout: 'admin' });
     const { 
         $api_admin_counter_list,

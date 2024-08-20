@@ -1,5 +1,5 @@
 <script setup>
-    useHead({ title: 'Admin Panel' });
+    useHead({ title: 'Admin | WT Screen' });
     definePageMeta({ middleware: ['auth-admin'], layout: 'admin' });
     const route = useRoute();
 	const current_slug = computed( () => route.params.slug );

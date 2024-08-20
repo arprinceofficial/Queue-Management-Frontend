@@ -45,6 +45,11 @@ export default defineNuxtPlugin(() => {
             api_admin_office_user_create: 'office-user-create',
             api_admin_office_user_update: 'office-user-update',
             api_admin_office_user_delete: 'office-user-delete',
+
+            api_admin_agent_user_list: 'agent-user-list',
+            api_admin_agent_user_create: 'agent-user-create',
+            api_admin_agent_user_update: 'agent-user-update',
+            api_admin_agent_user_delete: 'agent-user-delete',
         }
     };
 });

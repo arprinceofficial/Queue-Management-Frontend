@@ -8,8 +8,8 @@
     } from '@headlessui/vue'
 
     const {
-        $api_admin_office_user_create,
-        $api_admin_office_user_update,
+        $api_admin_agent_user_create,
+        $api_admin_agent_user_update,
         $api_admin_office_list,
         $api_admin_gender_list,
     } = useNuxtApp();
@@ -94,17 +94,17 @@
         formData.value.status = isChecked.value ? 1 : 0;
     }
 
-    const emit = defineEmits(['add_OfficeUser', 'cancel']);
+    const emit = defineEmits(['add_AgentUser', 'cancel']);
     const is_loading = ref(false);
-    const createOfficeUser = async () => {
+    const createAgentUser = async () => {
         try{
             is_loading.value = true;
-            const getData = await $fetchAdmin($api_admin_office_user_create, {
+            const getData = await $fetchAdmin($api_admin_agent_user_create, {
                 method: 'POST',
                 body: formData.value,
             });
             if(getData.status == true){
-                emit('add_OfficeUser', getData.data);
+                emit('add_AgentUser', getData.data);
             }
         } catch(e){
             console.log('Get Message',e.message);
@@ -112,16 +112,16 @@
             is_loading.value = false;
         }
     }
-    const updateOfficeUser = async () => {
+    const updateAgentUser = async () => {
         try{
             is_loading.value = true;
             formData.value.id = props.data.id;
-            const getData = await $fetchAdmin($api_admin_office_user_update, {
+            const getData = await $fetchAdmin($api_admin_agent_user_update, {
                 method: 'POST',
                 body: formData.value,
             });
             if(getData.status == true){
-                emit('add_OfficeUser', getData.data);
+                emit('add_AgentUser', getData.data);
             }
         } catch(e){
             console.log('Get Message',e.message);
@@ -150,7 +150,7 @@
                         <DialogPanel
                             class="w-full max-w-3xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                             <DialogTitle as="h3" class="text-lg text-center font-bold leading-6 text-gray-900">
-                                {{ title }} Office User
+                                {{ title }} Agent User
                             </DialogTitle>
                             <div class="mt-2">
                                 <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-6">
@@ -246,7 +246,7 @@
                                 </button>
                                 <button type="button"
                                     class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ml-3"
-                                    @click="title == 'Add' ? createOfficeUser() : updateOfficeUser()">
+                                    @click="title == 'Add' ? createAgentUser() : updateAgentUser()">
                                     {{ title == 'Add' ? 'Create' : 'Update' }}
                                 </button>
                             </div>
