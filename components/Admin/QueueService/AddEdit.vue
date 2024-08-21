@@ -145,7 +145,7 @@
                                     <div class="">
                                         <label for="icon"
                                             class="block text-sm font-medium text-gray-700">Icon</label>
-                                        <input type="icon" name="icon" id="icon"
+                                        <input type="text" name="icon" id="icon"
                                             v-model="formData.icon"
                                             placeholder="fa-solid fa-messages-question"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
