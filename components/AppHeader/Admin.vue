@@ -5,6 +5,7 @@
     const profile_image = ref('');
     async function getProfileImage() {
         try {
+            if (!admin_user.value?.data.user.profile_image) return;
             const response = await $fetchAdmin(admin_user.value?.data.user.profile_image, {
                 method: 'GET',
                 responseType: 'blob', // Set the response type to 'blob'
@@ -45,7 +46,7 @@
                                         class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-transparent dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                                         <!-- <img class="h-8 w-8 rounded-full object-cover" :src="profile_image ?? ''"
                                         alt="profile_image" /> -->
-                                        <img class="h-8 w-8 rounded-full object-cover" :src="profile_image ?? '/img/profile-image.png'" :class="!profile_image ? 'bg-gray-200 p-1' : ''"
+                                        <img class="h-8 w-8 rounded-full object-cover" :src="profile_image ? profile_image :'/img/profile-image.png'" :class="!profile_image ? 'bg-gray-200 p-1' : ''"
                                             alt="profile_image" 
                                         />
                                         <span class="pr-2 pl-2">{{ admin_user?.data?.user.first_name + ' ' +admin_user?.data?.user.last_name }}</span>
