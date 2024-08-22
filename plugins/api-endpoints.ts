@@ -40,6 +40,11 @@ export default defineNuxtPlugin(() => {
             api_admin_gender_create: 'gender-create',
             api_admin_gender_update: 'gender-update',
             api_admin_gender_delete: 'gender-delete',
+            
+            api_admin_service_list: 'service-list',
+            api_admin_service_create: 'service-create',
+            api_admin_service_update: 'service-update',
+            api_admin_service_delete: 'service-delete',
 
             api_admin_office_user_list: 'office-user-list',
             api_admin_office_user_create: 'office-user-create',
