@@ -91,6 +91,38 @@
             is_loading.value = false;
         }
     }
+    const addFeild = () => {
+        formData.value.fields.push({
+            selected_option: '',
+            type: '',
+            name: '',
+            label: '',
+            placeholder: '',
+            required: false,
+            options: [],
+        });
+    }
+
+    const option_type = ref([
+        { id: 1, value: 'text' },
+        { id: 2, value: 'email' },
+        { id: 3, value: 'number' },
+        { id: 4, value: 'radio' },
+    ]);
+
+    const field_options = ref([
+        { id: 1, value: 'Gender' },
+        { id: 2, value: 'Priority' },
+        { id: 3, value: 'Service' },
+    ]);
+
+    // const setOptions = (index) => {
+    //     if (formData.value.fields[index].selected_option == 1) {
+    //         formData.value.fields[index].field_options = admin_gender_list.value;
+    //     } else if (formData.value.fields[index].selected_option == 2) {
+    //         formData.value.fields[index].field_options = admin_priority_list.value;
+    //     }
+    // }
 </script>
 <template>
     <TransitionRoot appear :show="isOpen" as="template">
@@ -106,7 +138,7 @@
                         enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
                         leave-to="opacity-0 scale-95">
                         <DialogPanel
-                            class="w-full max-w-6xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                            class="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                             <DialogTitle as="h3" class="text-lg text-center font-bold leading-6 text-gray-900">
                                 {{ title }} Queue Service
                             </DialogTitle>
@@ -167,7 +199,92 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="flex justify-center">
+                                <h1 class="text-lg font-bold text-gray-900 py-8">Fields</h1>
+                            </div>
+                            <!-- {{ formData.fields }} -->
+                            <template v-if="formData.fields?.length > 0">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                                    <div class="flex flex-col" v-for="(field, index) in formData.fields" :key="index">
+                                        <div class="flex items-center justify-end">
+                                            <button type="button"
+                                                class="inline-flex justify-center items-center h-[40px] w-[40px] rounded-[50%] border border-transparent bg-red-100 p-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 ml-3"
+                                                @click="formData.fields.splice(index, 1)">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                        <div class="pb-5">
+                                            <label for="type"
+                                                class="block text-sm font-medium text-gray-700">Type</label>
+                                            <select name="type" id="type"
+                                                v-model="field.type"
+                                                class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                <option value="">Select Type</option>
+                                                <option v-for="option in option_type" :key="option.id" :value="option.value">{{ option.value }}</option>
+                                            </select>
+                                        </div>
+                                        <!-- Field Options -->
+                                         <!-- {{ field.selected_option }} -->
+                                         <div class="pb-5" v-if="field.type == 'radio'">
+                                            <label for="options"
+                                                class="block text-sm font-medium text-gray-700">Options</label>
+                                            <!-- <select name="field_options" id="field_options"v-model="field.selected_option" @change="setOptions(index)" -->
+                                            <select name="field_options" id="field_options"v-model="field.selected_option"
+                                                class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                                <option value="">Select Options</option>
+                                                <option v-for="option in field_options" :key="option.id" :value="option.id">{{ option.value }}</option>
+                                            </select>
+                                         </div>
+                                        <template v-if="field.type != ''">
+                                            <div class="pb-5">
+                                                <label for="name"
+                                                    class="block text-sm font-medium text-gray-700">Name</label>
+                                                <input type="text" name="name" id="name"
+                                                    v-model="field.name"
+                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="pb-5">
+                                                <label for="label"
+                                                    class="block text-sm font-medium text-gray-700">Label</label>
+                                                <input type="text" name="label" id="label"
+                                                    v-model="field.label"
+                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="pb-5" v-if="field.type != 'radio'">
+                                                <label for="placeholder"
+                                                    class="block text-sm font-medium text-gray-700">Placeholder</label>
+                                                <input type="text" name="placeholder" id="placeholder"
+                                                    v-model="field.placeholder"
+                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            </div>
+                                            <div class="flex items-end">
+                                                <div class="flex items-center gap-4">
+                                                    <label for="required"
+                                                        class="block text-sm font-medium text-gray-700">Required</label>
+                                                    <label class="flex cursor-pointer select-none items-center">
+                                                        <div class="relative">
+                                                            <input type="checkbox" class="sr-only" v-model="field.required" />
+                                                            <div class="block h-8 w-14 rounded-full" :class="field.required ? 'bg-green-200' : 'bg-gray-200'"></div>
+                                                            <div :class="field.required ? 'translate-x-full bg-green-600' : 'bg-white'"
+                                                                class="dot absolute left-1 top-1 h-6 w-6 rounded-full transition">
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </template>
+                            <div class="flex w-full justify-end">
+                                <div>
+                                    <button type="button"
+                                        class="inline-flex justify-center items-center h-[40px] w-[40px] rounded-[50%] border border-transparent bg-blue-100 p-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                        @click="addFeild()">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
                             <div class="mt-4 flex justify-end">
                                 <button type="button"
                                     class="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"

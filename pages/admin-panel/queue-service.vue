@@ -39,7 +39,15 @@
         admin_queue_service_list.value = admin_queue_service_list.value.map(item => item.id == data.id ? data : item); 
     }
     const addQueueService = () => {
-        data.value = {};
+        data.value = {
+            name: '',
+            color: '',
+            slug: '',
+            route: '',
+            icon: '',
+            status: 0,
+            fields: [],
+        };
         modal_title.value = 'Add';
         is_open_modal.value = true;
     }
