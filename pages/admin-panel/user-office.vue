@@ -155,7 +155,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="flex flex-row items-center justify-center">
+                                                    <div class="flex flex-row items-center justify-start">
                                                         {{ item.email }}
                                                     </div>
                                                 </td>
@@ -165,7 +165,7 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <div class="flex flex-row items-center justify-center">
+                                                    <div class="flex flex-row items-center justify-start">
                                                         {{ item.office.office_name }}
                                                     </div>
                                                 </td>

@@ -133,7 +133,11 @@
                                                         {{ index + 1 }}
                                                     </div>
                                                 </td>
-                                                <td>{{ item.name }}</td>
+                                                <td>
+                                                    <div class="flex flex-row items-center justify-center">
+                                                        {{ item.name }}
+                                                    </div>
+                                                </td>
                                                 <td>
                                                     <div class="flex flex-row items-center justify-center">
                                                         {{ item.short_name }}

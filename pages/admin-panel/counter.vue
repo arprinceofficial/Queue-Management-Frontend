@@ -141,7 +141,11 @@
                                                         {{ item.counter_number }}
                                                     </div>
                                                 </td>
-                                                <td>{{ item.title }}</td>
+                                                <td>
+                                                    <div class="flex flex-row items-center justify-center">
+                                                        {{ item.title }}
+                                                    </div>
+                                                </td>
                                                 <td>{{ item.office.office_name }}</td>
                                                 <td>
                                                     <div class="flex justify-center items-center">
