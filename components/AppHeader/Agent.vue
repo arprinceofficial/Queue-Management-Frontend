@@ -58,7 +58,7 @@
                                         <div class="font-medium text-sm text-gray-800 dark:text-gray-200">
                                             {{ agent_user?.data?.user.first_name + ' ' + agent_user?.data?.user.last_name }}
                                         </div>
-                                        <div class="font-medium text-sm text-gray-500">{{ agent_user?.data?.user?.email }}</div>
+                                        <div class="font-medium text-sm text-gray-500 truncate">{{ agent_user?.data?.user?.email }}</div>
                                     </div>
                                 </div>
                                 <!-- <DropdownLink href="/home"> Home </DropdownLink> -->
@@ -103,7 +103,7 @@
                     <div class="font-medium text-base text-gray-800 dark:text-gray-200">
                         {{ agent_user?.data?.user.first_name + ' ' + agent_user?.data?.user.last_name }}
                     </div>
-                    <div class="font-medium text-sm text-gray-500">{{ agent_user?.data?.user?.email }}</div>
+                    <div class="font-medium text-sm text-gray-500 truncate">{{ agent_user?.data?.user?.email }}</div>
                 </div>
 
                 <div class="mt-3 space-y-1">

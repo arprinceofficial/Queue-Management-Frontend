@@ -60,7 +60,7 @@
                                         <div class="font-medium text-sm text-gray-800 dark:text-gray-200">
                                             {{ office_user?.data?.user.first_name + ' ' + office_user?.data?.user.last_name }}
                                         </div>
-                                        <div class="font-medium text-sm text-gray-500">{{ office_user?.data?.user?.email }}</div>
+                                        <div class="font-medium text-sm text-gray-500 truncate">{{ office_user?.data?.user?.email }}</div>
                                     </div>
                                 </div>
                                 <!-- <DropdownLink href="/home"> Home </DropdownLink> -->

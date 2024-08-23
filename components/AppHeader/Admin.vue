@@ -60,7 +60,7 @@
                                         <div class="font-medium text-sm text-gray-800 dark:text-gray-200">
                                             {{ admin_user?.data?.user.first_name + ' ' + admin_user?.data?.user.last_name }}
                                         </div>
-                                        <div class="font-medium text-sm text-gray-500">{{ admin_user?.data?.user?.email }}</div>
+                                        <div class="font-medium text-sm text-gray-500 truncate">{{ admin_user?.data?.user?.email }}</div>
                                     </div>
                                 </div>
                                 <!-- <DropdownLink href="/home"> Home </DropdownLink> -->
@@ -105,7 +105,7 @@
                     <div class="font-medium text-base text-gray-800 dark:text-gray-200">
                         {{ admin_user?.data?.user.first_name + ' ' + admin_user?.data?.user.last_name }}
                     </div>
-                    <div class="font-medium text-sm text-gray-500">{{ admin_user?.data?.user?.email }}</div>
+                    <div class="font-medium text-sm text-gray-500 truncate">{{ admin_user?.data?.user?.email }}</div>
                 </div>
 
                 <div class="mt-3 space-y-1">
