@@ -70,13 +70,13 @@
 </script>
 <template>
     <!-- <pre>{{ office_user.data.office }}</pre> -->
-    <!-- {{ waiting_list.contentData[0].video_url }} -->
+    <!-- {{ waiting_list.contentData[0].link }} -->
     <!-- <pre>{{ waiting_list }}</pre> -->
     <div class="h-screen flex flex-col items-center">
         <div class="bg-red-800 w-full" style="height: 120px; background: #0083C4; border-bottom-left-radius: 50px; padding: 10px 50px;">
             <h1 class="text-[20px] md:text-[40px] font-semibold text-white flex flex-col">
                 <div class="flex items-center">
-                    <span class="pr-4" style="color: #79FFFF;">AVP&nbsp;:&nbsp;</span>
+                    <span class="pr-4 w-[400px]" style="color: #79FFFF;">Latest News &nbsp;:&nbsp;</span>
                     <!-- Announcement of Leaps -->
                     <!-- <marquee class="text-white" behavior="scroll" direction="left" scrollamount="10" style="width: 100%;" onmouseover="this.stop();" onmouseout="this.start();">
                         <template v-for="(item, index) in news_items" :key="index" class="flex items-center">
@@ -132,7 +132,7 @@
                              <iframe style="border-radius: 30px 30px 10px 10px;"
                                 width="100%" 
                                 height="100%" 
-                                :src="yt_embed_link(waiting_list?.contentData[0].video_url)"
+                                :src="yt_embed_link(waiting_list?.contentData[0].link)"
                                 title="YouTube video player" 
                                 frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
