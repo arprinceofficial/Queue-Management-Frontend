@@ -60,6 +60,16 @@ export default defineNuxtPlugin(() => {
             api_admin_queue_service_create: 'queue-service-create',
             api_admin_queue_service_update: 'queue-service-update',
             api_admin_queue_service_delete: 'queue-service-delete',
+
+            api_admin_wt_news_list: 'wt-news-list',
+            api_admin_wt_news_create: 'wt-news-create',
+            api_admin_wt_news_update: 'wt-news-update',
+            api_admin_wt_news_delete: 'wt-news-delete',
+
+            api_admin_wt_video_list: 'wt-video-list',
+            api_admin_wt_video_create: 'wt-video-create',
+            api_admin_wt_video_update: 'wt-video-update',
+            api_admin_wt_video_delete: 'wt-video-delete',
         }
     };
 });
