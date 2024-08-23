@@ -24,7 +24,7 @@
     <!-- {{ current_slug }} <br> {{ current_path }} <br> -->
     <!-- <pre>{{ queue_service_list }}</pre> -->
     <div
-        class="bg-[#D4E7DF] h-full w-[400px] py-2 overflow-auto transition-all duration-500 ease-in-out transform"
+        class="bg-[#D4E7DF] h-full py-2 overflow-auto transition-all duration-500 ease-in-out transform"
         :class="hamburger_button ? 'translate-x-0 w-[400px]' : '-translate-x-full w-0'"
     >
         <div v-if="hamburger_button" class="w-full flex justify-end pb-3 px-2">
