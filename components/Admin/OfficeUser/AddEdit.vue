@@ -53,11 +53,12 @@
         }
     }
 
-    const admin_country_list = useState('admin_country_list', () => []);
+    const admin_country_list = ref('admin_country_list');
     const loadCountryList = async () => {
         try{
             const getData = await $fetchAdmin($api_admin_country_list, {
-                method: 'GET',
+                method: 'POST',
+                body: { status: 1 },
             });
             admin_country_list.value = getData.data;
         } catch(e){
