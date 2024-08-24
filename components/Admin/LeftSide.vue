@@ -16,6 +16,7 @@
         { name: 'Office User', icon: 'fas fa-user', route: '/admin-panel/user-office' },
         { name: 'Agent User', icon: 'fas fa-user', route: '/admin-panel/user-agent' },
         { name: 'Queue Service', icon: 'fas fa-list-alt', route: '/admin-panel/queue-service' },
+        { name: 'Country', icon: 'fas fa-list-alt', route: '/admin-panel/country' },
     ]);
 
     const hamburger_button = useState('hamburger_button' , () => true);
