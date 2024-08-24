@@ -66,9 +66,13 @@
         is_open_modal.value = false;
         console.log('Received Data', data);
 
+        // modal_title.value == 'Add' ? 
+        // admin_country_list.value.push(data) :
+        // admin_country_list.value = admin_country_list.value.map(item => item.id == data.id ? data : item);
+        
         modal_title.value == 'Add' ? 
         admin_country_list.value.push(data) :
-        admin_country_list.value = admin_country_list.value.map(item => item.id == data.id ? data : item); 
+        loadCountryList();
     }
     const addCountry = () => {
         data.value = {};
