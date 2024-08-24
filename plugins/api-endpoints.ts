@@ -70,6 +70,11 @@ export default defineNuxtPlugin(() => {
             api_admin_wt_video_create: 'wt-video-create',
             api_admin_wt_video_update: 'wt-video-update',
             api_admin_wt_video_delete: 'wt-video-delete',
+
+            api_admin_country_list: 'country-list',
+            api_admin_country_create: 'country-create',
+            api_admin_country_update: 'country-update',
+            api_admin_country_delete: 'country-delete',
         }
     };
 });

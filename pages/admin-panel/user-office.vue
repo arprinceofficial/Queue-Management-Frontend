@@ -131,6 +131,11 @@
                                                 </th>
                                                 <th width="10%">
                                                     <div class="flex flex-row items-center justify-center gap-2">
+                                                        <span>Country</span>
+                                                    </div>
+                                                </th>
+                                                <th width="10%">
+                                                    <div class="flex flex-row items-center justify-center gap-2">
                                                         <span>Status</span>
                                                     </div>
                                                 </th>
@@ -167,6 +172,11 @@
                                                 <td>
                                                     <div class="flex flex-row items-center justify-start">
                                                         {{ item.office.office_name }}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="flex flex-row items-center justify-start">
+                                                        {{ item.country.country_name }}
                                                     </div>
                                                 </td>
                                                 <td>
