@@ -89,7 +89,7 @@
                             Add Agent User
                         </button>
                     </div>
-                    <div class="px-6 pb-2 flex flex-col justify-between h-full w-full overflow-auto">
+                    <div class="px-6 pb-2 flex flex-col justify-between w-full">
                         <div class="mt-4 border border-gray-200 rounded-lg">
                             <div class="border-b border-gray-200">
                                 <h4 class="text-[18px] font-semibold dark:text-gray-200 py-2 px-4">Agent User List</h4>
