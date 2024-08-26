@@ -27,7 +27,7 @@ export const adminAuth = () => {
 		$fetchAdmin(LOGOUT, { method: 'GET' });
 		admin_user.value = null;
 		cookie.value = null;
-		await router.push('/');
+		await router.push('/admin-login');
 	}
 
 	return {
