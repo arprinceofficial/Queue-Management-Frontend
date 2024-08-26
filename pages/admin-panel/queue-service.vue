@@ -54,7 +54,8 @@
 
         modal_title.value == 'Add' ? 
         admin_queue_service_list.value.push(data) :
-        admin_queue_service_list.value = admin_queue_service_list.value.map(item => item.id == data.id ? data : item); 
+        loadQueueServiceList();
+        // admin_queue_service_list.value = admin_queue_service_list.value.map(item => item.id == data.id ? data : item); 
     }
     const addQueueService = () => {
         data.value = {
