@@ -187,7 +187,7 @@
                                             <tr v-for="(item, index) in admin_queue_service_list" :key="index">
                                                 <td class="sticky left-0">
                                                     <div class="flex justify-center items-center">
-                                                        {{ index + 1 }}
+                                                        {{ (pagination_config.data.current_page - 1) * pagination_config.data.per_page + index + 1 }}
                                                     </div>
                                                 </td>
                                                 <td>{{ item.name }}</td>
