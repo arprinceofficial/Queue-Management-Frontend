@@ -5,7 +5,7 @@
         $api_admin_country_list,
         $api_admin_country_delete,
     } = useNuxtApp();
-    const route = useRoute();
+    
     // const pagination_config = ref({
     //     data: {
     //         current_page: 1,
@@ -19,6 +19,7 @@
     //     align: 'center',
     //     action: ''
     // })
+    const route = useRoute();
     const status = ref('');
     const search = ref('');
     const pagination_config = ref({
@@ -49,11 +50,9 @@
             loader.value = false;
         }
     }
-
     onMounted(() => {
         loadCountryList();
     });
-
     watch(() => route.query, (to) => {
         loadCountryList();
     })
