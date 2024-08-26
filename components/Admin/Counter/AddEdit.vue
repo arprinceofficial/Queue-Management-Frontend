@@ -65,7 +65,10 @@
     const loadOfficeList = async () => {
         try{
             const getData = await $fetchAdmin($api_admin_office_list, {
-                method: 'GET',
+                method: 'POST',
+                body: {
+                    status: 1,
+                },
             });
             admin_office_list.value = getData.data;
         } catch(e){

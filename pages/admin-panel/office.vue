@@ -2,29 +2,47 @@
     useHead({ title: 'Admin | Office' });
     definePageMeta({ middleware: ['auth-admin'], layout: 'admin' });
     const { 
-        $api_admin_office_list_all,
+        $api_admin_office_list,
         $api_admin_office_delete,
     } = useNuxtApp();
 
+    const route = useRoute();
+    const status = ref('');
+    const search = ref('');
+    const pagination_config = ref({
+        data: [],
+        lang: 'en',
+        align: 'center',
+        action: ''
+    });
     const loader = ref(false);
-    const admin_office_list_all = useState('admin_office_list_all', () => []);
+    const admin_office_list = ref([]);
     const loadOfficeList = async () => {
         loader.value = true;
         try{
-            const getData = await $fetchAdmin($api_admin_office_list_all, {
-                method: 'GET',
+            const getData = await $fetchAdmin($api_admin_office_list, {
+                method: 'POST',
+                body: {
+                    page: route.query.page ? route.query.page : 1,
+                    limit: 10,
+                    search: search.value,
+                    status: status.value,
+                },
             });
-            admin_office_list_all.value = getData.data;
+            admin_office_list.value = getData.data;
+            pagination_config.value.data = getData.pagination;
         } catch(e){
             console.log('Get Message',e.message);
         } finally {
             loader.value = false;
         }
     }
-
     onMounted(() => {
         loadOfficeList();
     });
+    watch(() => route.query, (to) => {
+        loadOfficeList();
+    })
 
     // Office Add Edit Modal Handler
     const data = ref({});
@@ -35,8 +53,9 @@
         console.log('Received Data', data);
 
         modal_title.value == 'Add' ? 
-        admin_office_list_all.value.push(data) :
-        admin_office_list_all.value = admin_office_list_all.value.map(item => item.id == data.id ? data : item); 
+        admin_office_list.value.push(data) :
+        loadOfficeList();
+        // admin_office_list.value = admin_office_list.value.map(item => item.id == data.id ? data : item); 
     }
     const addOffice = () => {
         data.value = {};
@@ -61,7 +80,7 @@
                 body: {id: id},
             });
             if (getData.status == true) {
-                admin_office_list_all.value = admin_office_list_all.value.filter(item => item.id != id);
+                admin_office_list.value = admin_office_list.value.filter(item => item.id != id);
             }
         } catch(e){
             console.log('Get Message',e.message);
@@ -81,15 +100,31 @@
             <div class="flex h-full">
                 <AdminLeftSide />
                 <!-- Right Side -->
-                <LoaderSpinkitBounceLoader v-if="loader" class="w-full"/>
-                <div v-else class="h-full w-full overflow-auto">
-                    <div class="w-full flex justify-end pt-5 px-8">
+                <div class="h-full w-full overflow-auto">
+                    <div class="w-full flex justify-between items-center pt-5 px-8 mb-4">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-4">
+                                <div class="flex items-center gap-2">
+                                    <label for="search" class="text-[#4D5155] dark:text-gray-200">Search</label>
+                                    <input type="text" id="search" class="border border-gray-200 rounded-lg px-3 py-2" v-model="search" @input="loadOfficeList">
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <label for="status" class="text-[#4D5155] dark:text-gray-200">Status</label>
+                                    <select v-model="status" @change="loadOfficeList" id="status" class="border border-gray-200 rounded-lg px-3 py-2 pr-8">
+                                        <option value="">All</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <button @click="addOffice" class="bg-[#0083C4] text-white py-2 px-4 rounded-lg ml-4 mb-4">
                             <i class="fas fa-plus pr-1"></i>
                             Add Office
                         </button>
                     </div>
-                    <div class="px-6 pb-2 flex flex-col justify-between w-full">
+                    <LoaderSpinkitBounceLoader v-if="loader" class="w-full"/>
+                    <div v-else class="px-6 pb-2 flex flex-col justify-between w-full">
                         <div class="mt-4 border border-gray-200 rounded-lg">
                             <div class="border-b border-gray-200">
                                 <h4 class="text-[18px] font-semibold dark:text-gray-200 py-2 px-4">Office List</h4>
@@ -122,10 +157,10 @@
                                             </tr>
                                         </thead>
                                         <tbody class="">
-                                            <tr v-for="(item, index) in admin_office_list_all" :key="index">
+                                            <tr v-for="(item, index) in admin_office_list" :key="index">
                                                 <td class="sticky left-0">
                                                     <div class="flex justify-center items-center">
-                                                        {{ index + 1 }}
+                                                        {{ (pagination_config.data.current_page - 1) * pagination_config.data.per_page + index + 1 }}
                                                     </div>
                                                 </td>
                                                 <td>{{ item.office_name }}</td>
@@ -152,6 +187,7 @@
                                     </table>
                                 </div>
                             </div>
+                            <Pagination class="px-4" :config="pagination_config"/>
                         </div>
                     </div>
                 </div>

@@ -20,7 +20,6 @@ export default defineNuxtPlugin(() => {
             api_agent_queue_vouchers_reject_queue: 'cancel-queue',
 
             // Admin API Endpoints
-            api_admin_office_list_all: 'office-list-all',
             api_admin_office_list: 'office-list',
             api_admin_office_create: 'office-create',
             api_admin_office_update: 'office-update',
