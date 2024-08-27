@@ -190,7 +190,7 @@
                                                 </th>
                                                 <th width="15%">
                                                     <div class="flex flex-row items-center justify-center gap-2">
-                                                        <span>Agent Name</span>
+                                                        <span>Office Name</span>
                                                     </div>
                                                 </th>
                                                 <th width="10%">
