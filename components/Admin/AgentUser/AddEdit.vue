@@ -12,6 +12,7 @@
         $api_admin_agent_user_update,
         $api_admin_office_list,
         $api_admin_gender_list,
+        $api_admin_country_list,
     } = useNuxtApp();
 
     const props = defineProps({
@@ -55,9 +56,23 @@
         }
     }
     
+    const admin_country_list = ref('admin_country_list');
+    const loadCountryList = async () => {
+        try{
+            const getData = await $fetchAdmin($api_admin_country_list, {
+                method: 'POST',
+                body: { status: 1 },
+            });
+            admin_country_list.value = getData.data;
+        } catch(e){
+            console.log('Get Message',e.message);
+        }
+    }
+
     onMounted(() => {
         loadOfficeList();
         loadGenderList();
+        loadCountryList();
     });
 
     const formData = ref({
@@ -69,6 +84,7 @@
         confirm_password: '',
         office_id: '',
         gender_id: '',
+        country_id: '',
         profile_image: '',
         status: 0,
     });
@@ -84,6 +100,7 @@
                 password: '',
                 office_id: value.office?.id,
                 gender_id: value.gender?.id,
+                country_id: value.country?.id,
                 profile_image: value.profile_image,
                 status: value.status,
             };
@@ -330,6 +347,18 @@
                                                 </option>
                                             </select>
                                             <InputError class="text-sm mt-2" :message="validations_errors.gender_id" :text_size="'text-sm'" />
+                                        </div>
+                                        <div class="">
+                                            <label for="country_id"
+                                                class="block text-sm font-medium text-gray-700">Country</label>
+                                            <select id="country_id" name="country_id" v-model="formData.country_id"
+                                                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                                                <option value="">Select Country</option>
+                                                <option v-for="(item, index) in admin_country_list" :key="index"
+                                                    :value="item.id">{{ item.country_name }}
+                                                </option>
+                                            </select>
+                                            <InputError class="text-sm mt-2" :message="validations_errors.country_id" :text_size="'text-sm'" />
                                         </div>
                                         <div class="flex items-end">
                                             <div class="flex items-center gap-4">
