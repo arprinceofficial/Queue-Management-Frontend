@@ -6,6 +6,7 @@
         $api_admin_agent_user_delete,
         $api_admin_office_list,
     } = useNuxtApp();
+    const response_modal = ref({});
 
     const admin_office_list = useState('admin_office_list', () => []);
     const loadOfficeList = async () => {
@@ -101,11 +102,16 @@
                 method: 'POST',
                 body: {id: id},
             });
+            response_modal.value = getData;
             if (getData.status == true) {
                 admin_agent_user_list.value = admin_agent_user_list.value.filter(item => item.id != id);
             }
         } catch(e){
             console.log('Get Message',e.message);
+            response_modal.value = {
+                status: e.response._data.status,
+                message: e.response._data.message,
+            }
         } finally {
             is_loading.value = false;
         }
@@ -270,5 +276,6 @@
             @cancel="cancelModal"
         />
         <LoaderModalSpin :isOpen="is_loading" />
+        <ResponseModal :response_modal="response_modal" />
     </div>
 </template>

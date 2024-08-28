@@ -40,7 +40,7 @@
 </script>
 <template>
     <TransitionRoot appear :show="isResOpen" as="template">
-        <Dialog as="div" class="relative z-50">
+        <Dialog as="div" class="relative z-40">
             <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0" enter-to="opacity-100"
                 leave="duration-200 ease-in" leave-from="opacity-100" leave-to="opacity-0">
                 <div class="fixed inset-0 bg-black/25" />
@@ -71,7 +71,7 @@
                                             class="text-left font-medium text-gray-900 whitespace-nowrap dark:text-white w-full">
                                             <div class="success-icon flex justify-center items-center">
                                                 <div class="demo1">
-                                                    <div v-if="response_modal.status == true" class="flex items-center justify-center flex-col">
+                                                    <div v-if="response_modal.status == true" class="flex flex-col items-center justify-center">
                                                         <div class="ui-success">
                                                             <svg viewBox="0 0 87 87" version="1.1"
                                                                 xmlns="http://www.w3.org/2000/svg"
@@ -96,36 +96,41 @@
                                                             </svg>
                                                         </div>
                                                         <p class="text-green-700 text-lg font-medium text-gray-900 dark:text-white text-wrap pb-2">
-                                                            {{ response_modal.message }}
+                                                            {{ response_modal?.message }}
                                                         </p>
                                                     </div>
-                                                    <div v-if="response_modal.status == false" class="ui-error">
-                                                        <svg viewBox="0 0 87 87" version="1.1"
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none"
-                                                                fill-rule="evenodd">
-                                                                <g id="Group-2"
-                                                                    transform="translate(2.000000, 2.000000)">
-                                                                    <circle id="Oval-2" stroke="rgba(252, 191, 191, .5)"
-                                                                        stroke-width="4" cx="41.5" cy="41.5" r="41.5">
-                                                                    </circle>
-                                                                    <circle class="ui-error-circle" stroke="#F74444"
-                                                                        stroke-width="4" cx="41.5" cy="41.5" r="41.5">
-                                                                    </circle>
-                                                                    <path class="ui-error-line1"
-                                                                        d="M22.244224,22 L60.4279902,60.1837662"
-                                                                        id="Line" stroke="#F74444" stroke-width="3"
-                                                                        stroke-linecap="square">
-                                                                    </path>
-                                                                    <path class="ui-error-line2"
-                                                                        d="M60.755776,21 L23.244224,59.8443492"
-                                                                        id="Line" stroke="#F74444" stroke-width="3"
-                                                                        stroke-linecap="square">
-                                                                    </path>
+                                                    <div v-if="response_modal.status == false" class="flex flex-col items-center justify-center">
+                                                        <div class="ui-error">
+                                                            <svg viewBox="0 0 87 87" version="1.1"
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                                <g id="Page-1" stroke="none" stroke-width="1" fill="none"
+                                                                    fill-rule="evenodd">
+                                                                    <g id="Group-2"
+                                                                        transform="translate(2.000000, 2.000000)">
+                                                                        <circle id="Oval-2" stroke="rgba(252, 191, 191, .5)"
+                                                                            stroke-width="4" cx="41.5" cy="41.5" r="41.5">
+                                                                        </circle>
+                                                                        <circle class="ui-error-circle" stroke="#F74444"
+                                                                            stroke-width="4" cx="41.5" cy="41.5" r="41.5">
+                                                                        </circle>
+                                                                        <path class="ui-error-line1"
+                                                                            d="M22.244224,22 L60.4279902,60.1837662"
+                                                                            id="Line" stroke="#F74444" stroke-width="3"
+                                                                            stroke-linecap="square">
+                                                                        </path>
+                                                                        <path class="ui-error-line2"
+                                                                            d="M60.755776,21 L23.244224,59.8443492"
+                                                                            id="Line" stroke="#F74444" stroke-width="3"
+                                                                            stroke-linecap="square">
+                                                                        </path>
+                                                                    </g>
                                                                 </g>
-                                                            </g>
-                                                        </svg>
+                                                            </svg>
+                                                        </div>
+                                                        <p class="text-red-700 text-lg font-medium text-gray-900 dark:text-white text-wrap pb-2">
+                                                            {{ response_modal?.message }}
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,12 +139,6 @@
                                                     {{ msg }}
                                                 </p>
                                             </div>
-                                            <div v-else class="text-start">
-                                                <p class="text-red-700 text-lg font-medium text-gray-900 dark:text-white text-wrap pb-2">
-                                                    {{ response_modal.message }}
-                                                </p>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>

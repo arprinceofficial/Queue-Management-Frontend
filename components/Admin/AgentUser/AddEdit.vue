@@ -26,8 +26,7 @@
             type: Object,
         },
     });
-    const response_modal = ref({});
-
+    
     const admin_office_list = useState('admin_office_list', () => []);
     const loadOfficeList = async () => {
         // if(admin_office_list.value.length > 0) return;
@@ -56,7 +55,6 @@
         }
     }
     
-
     onMounted(() => {
         loadOfficeList();
         loadGenderList();
@@ -77,6 +75,7 @@
     
     watch(() => props.data, (value) => {
         if (value) {
+            validations_errors.value = {};
             formData.value = {
                 first_name: value.first_name,
                 last_name: value.last_name,
@@ -98,25 +97,67 @@
         formData.value.status = isChecked.value ? 1 : 0;
     }
 
+    const validations_errors = ref({});
+    const skip_validations = ref([
+        'status',
+    ]);
+    const response_modal = ref({});
     const emit = defineEmits(['add_AgentUser', 'cancel']);
     const is_loading = ref(false);
     const createAgentUser = async () => {
+        validations_errors.value = {};
+
+        const errors = Object.keys(formData.value).filter(item => !formData.value[item] && !skip_validations.value.includes(item));
+        if(errors.length > 0){
+            errors.map(item => {
+                validations_errors.value[item] = `${item.replaceAll('_', ' ')} is required`;
+            });
+            console.log(validations_errors.value);
+            return;
+        }
+
         try{
             is_loading.value = true;
             const getData = await $fetchAdmin($api_admin_agent_user_create, {
                 method: 'POST',
                 body: formData.value,
             });
+            response_modal.value = getData;
             if(getData.status == true){
                 emit('add_AgentUser', getData.data);
             }
         } catch(e){
             console.log('Get Message',e.message);
+            if(e.response.status === 403 || e.response.status === 409){
+                for (const key in e.response._data.error) {
+                    if (e.response._data.error.hasOwnProperty(key)) {
+                        const value = e.response._data.error[key][0];
+                        validations_errors.value[key] = value;
+                    }
+                }
+            } else {
+                response_modal.value = {
+                    status: e.response._data.status,
+                    message: e.response._data.message,
+                    // error: e.response._data.error,
+                }
+            }
         } finally {
             is_loading.value = false;
         }
     }
     const updateAgentUser = async () => {
+        validations_errors.value = {};
+
+        const errors = Object.keys(formData.value).filter(item => !formData.value[item] && !skip_validations.value.includes(item));
+        if(errors.length > 0){
+            errors.map(item => {
+                validations_errors.value[item] = `${item.replaceAll('_', ' ')} is required`;
+            });
+            console.log(validations_errors.value);
+            return;
+        }
+
         try{
             is_loading.value = true;
             formData.value.id = props.data.id;
@@ -129,15 +170,63 @@
                 emit('add_AgentUser', getData.data);
             }
         } catch(e){
-            console.log('Get Message',e.response._data);
-            response_modal.value = {
-                status: e.response._data.status,
-                message: e.response._data.message,
+            console.log('Get Message', e.response.status);
+            if(e.response.status === 403 || e.response.status === 409){
+                for (const key in e.response._data.error) {
+                    if (e.response._data.error.hasOwnProperty(key)) {
+                        const value = e.response._data.error[key][0];
+                        validations_errors.value[key] = value;
+                    }
+                }
+            } else {
+                response_modal.value = {
+                    status: e.response._data.status,
+                    message: e.response._data.message,
+                    // error: e.response._data.error,
+                }
             }
         } finally {
             is_loading.value = false;
         }
     }
+
+    // check password
+    watch(() => formData.value.password, (value) => {
+        if(value?.length > 0){
+            if(value.length < 8){
+                validations_errors.value.password = 'Password must be at least 8 characters.';
+            } else {
+                validations_errors.value.password = '';
+            }
+        } else {
+            validations_errors.value.password = '';
+        }
+    });
+    // check confirm password
+    watch(() => formData.value.confirm_password, (value) => {
+        if(value?.length > 0){
+            if(value != formData.value.password){
+                validations_errors.value.confirm_password = 'Password and Confirm Password must be same.';
+            } else {
+                validations_errors.value.confirm_password = '';
+            }
+        } else {
+            validations_errors.value.confirm_password = '';
+        }
+    });
+    // Match password and confirm password
+    watch(() => formData.value.confirm_password, (value) => {
+        if(value?.length > 0){
+            if(value != formData.value.password){
+                validations_errors.value.confirm_password = 'Password and Confirm Password must be same.';
+            } else {
+                validations_errors.value.confirm_password = '';
+            }
+        } else {
+            validations_errors.value.confirm_password = '';
+        }
+    });
+
 
     const setPhoto = (photo) => {
         formData.value.profile_image = photo;
@@ -164,9 +253,13 @@
                                 </DialogTitle>
                                 <div class="mt-2">
                                     <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-6">
-                                        <PhotoBlockPhoto :getPhoto="formData.profile_image" @set_photo="setPhoto" />
+                                        <div>
+                                            <PhotoBlockPhoto :getPhoto="formData.profile_image" @set_photo="setPhoto" />
+                                            <InputError class="text-sm py-3 mb-2" :message="validations_errors.profile_image" :text_size="'text-sm'" />
+                                        </div>
                                     </div>
                                     <!-- <pre>{{ data }}</pre> -->
+                                     <!-- {{validations_errors}} -->
                                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6">
                                         <div class="">
                                             <label for="first_name"
@@ -174,6 +267,7 @@
                                             <input type="text" name="first_name" id="first_name"
                                                 v-model="formData.first_name"
                                                 class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            <InputError class="text-sm mt-2" :message="validations_errors.first_name" :text_size="'text-sm'" />
                                         </div>
                                         <div class="">
                                             <label for="last_name"
@@ -181,6 +275,7 @@
                                             <input type="text" name="last_name" id="last_name"
                                                 v-model="formData.last_name"
                                                 class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            <InputError class="text-sm mt-2" :message="validations_errors.last_name" :text_size="'text-sm'" />
                                         </div>
                                         <div class="">
                                             <label for="mobile_number"
@@ -188,11 +283,13 @@
                                             <input type="text" name="mobile_number" id="mobile_number"
                                                 v-model="formData.mobile_number"
                                                 class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            <InputError class="text-sm mt-2" :message="validations_errors.mobile_number" :text_size="'text-sm'" />
                                         </div>
                                         <div class="">
                                             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                                             <input type="email" name="email" id="email" v-model="formData.email"
                                                 class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            <InputError class="text-sm mt-2" :message="validations_errors.email" :text_size="'text-sm'" />
                                         </div>
                                         <div class="">
                                             <label for="password"
@@ -200,6 +297,7 @@
                                             <input type="password" name="password" id="password"
                                                 v-model="formData.password"
                                                 class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            <InputError class="text-sm mt-2" :message="validations_errors.password" :text_size="'text-sm'" />
                                         </div>
                                         <div class="">
                                             <label for="confirm_password"
@@ -207,6 +305,7 @@
                                             <input type="password" name="confirm_password" id="confirm_password"
                                                 v-model="formData.confirm_password"
                                                 class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                            <InputError class="text-sm mt-2" :message="validations_errors.confirm_password" :text_size="'text-sm'" />
                                         </div>
                                         <div class="">
                                             <label for="office_id"
@@ -218,6 +317,7 @@
                                                     :value="item.id">{{ item.office_name }}
                                                 </option>
                                             </select>
+                                            <InputError class="text-sm mt-2" :message="validations_errors.office_id" :text_size="'text-sm'" />
                                         </div>
                                         <div class="">
                                             <label for="gender_id"
@@ -229,6 +329,7 @@
                                                     :value="item.id">{{ item.name }}
                                                 </option>
                                             </select>
+                                            <InputError class="text-sm mt-2" :message="validations_errors.gender_id" :text_size="'text-sm'" />
                                         </div>
                                         <div class="flex items-end">
                                             <div class="flex items-center gap-4">
