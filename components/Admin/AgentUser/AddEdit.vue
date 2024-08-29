@@ -123,13 +123,16 @@
     const is_loading = ref(false);
     const createAgentUser = async () => {
         validations_errors.value = {};
-
         const errors = Object.keys(formData.value).filter(item => !formData.value[item] && !skip_validations.value.includes(item));
         if(errors.length > 0){
             errors.map(item => {
                 validations_errors.value[item] = `${item.replaceAll('_', ' ')} is required`;
             });
             console.log(validations_errors.value);
+            return;
+        }
+        if(formData.value.password != formData.value.confirm_password){
+            validations_errors.value['confirm_password'] = 'Password and Confirm Password does not match';
             return;
         }
 
@@ -145,12 +148,17 @@
             }
         } catch(e){
             console.log('Get Message',e.message);
-            if(e.response.status === 403 || e.response.status === 409){
+            if(e.response?.status === 403 || e.response?.status === 409){
                 for (const key in e.response._data.error) {
                     if (e.response._data.error.hasOwnProperty(key)) {
                         const value = e.response._data.error[key][0];
                         validations_errors.value[key] = value;
                     }
+                }
+            } else if (!e.response?.status){
+                response_modal.value = {
+                    status: false,
+                    message: 'Something went wrong. Please try again later.',
                 }
             } else {
                 response_modal.value = {
@@ -158,6 +166,7 @@
                     message: e.response._data.message,
                     // error: e.response._data.error,
                 }
+                
             }
         } finally {
             is_loading.value = false;
@@ -165,13 +174,16 @@
     }
     const updateAgentUser = async () => {
         validations_errors.value = {};
-
         const errors = Object.keys(formData.value).filter(item => !formData.value[item] && !skip_validations.value.includes(item));
         if(errors.length > 0){
             errors.map(item => {
                 validations_errors.value[item] = `${item.replaceAll('_', ' ')} is required`;
             });
             console.log(validations_errors.value);
+            return;
+        }
+        if(formData.value.password != formData.value.confirm_password){
+            validations_errors.value['confirm_password'] = 'Password and Confirm Password does not match';
             return;
         }
 
@@ -188,12 +200,17 @@
             }
         } catch(e){
             console.log('Get Message', e.response.status);
-            if(e.response.status === 403 || e.response.status === 409){
+            if(e.response?.status === 403 || e.response?.status === 409){
                 for (const key in e.response._data.error) {
                     if (e.response._data.error.hasOwnProperty(key)) {
                         const value = e.response._data.error[key][0];
                         validations_errors.value[key] = value;
                     }
+                }
+            } else if (!e.response?.status){
+                response_modal.value = {
+                    status: false,
+                    message: 'Something went wrong. Please try again later.',
                 }
             } else {
                 response_modal.value = {
@@ -201,6 +218,7 @@
                     message: e.response._data.message,
                     // error: e.response._data.error,
                 }
+                
             }
         } finally {
             is_loading.value = false;

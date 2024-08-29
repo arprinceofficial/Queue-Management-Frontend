@@ -21,6 +21,9 @@
             }, 3000);
         } else {
             isResOpen.value = true;
+            setTimeout(() => {
+                closeModal();
+            }, 3000);
         }
     });
 
@@ -54,13 +57,13 @@
                         <DialogPanel
                             class="w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                             <div class="mt-2">
-                                <div v-if="response_modal.status == false" class="flex justify-end ">
+                                <!-- <div v-if="response_modal.status == false" class="flex justify-end ">
                                     <div class="flex justify-end items-center">
                                         <button @click="closeModal" class="inline-flex items-center justify-center w-10 h-10 rounded-full text-red-700 bg-red-200 hover:bg-red-300 focus:outline-none">
                                             <i class="fas fa-times"></i>
                                         </button>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- <pre>{{ response_modal }}</pre> -->
                                 <div class="flex flex-wrap pr-3 pl-3">
                                     <div class="flex items-start w-full justify-center items-center">

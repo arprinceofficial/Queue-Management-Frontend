@@ -6,7 +6,6 @@
         $api_admin_agent_user_delete,
         $api_admin_office_list,
     } = useNuxtApp();
-    const response_modal = ref({});
 
     const admin_office_list = useState('admin_office_list', () => []);
     const loadOfficeList = async () => {
@@ -92,6 +91,7 @@
     }
 
     // Counter Delete Handler
+    const response_modal = ref({});
     const is_loading = ref(false);
     const deleteAgentUser = async (id) => {
         const confirm = window.confirm('Are you sure you want to delete this item?');
@@ -108,9 +108,17 @@
             }
         } catch(e){
             console.log('Get Message',e.message);
-            response_modal.value = {
-                status: e.response._data.status,
-                message: e.response._data.message,
+            if (!e.response?.status){
+                response_modal.value = {
+                    status: false,
+                    message: 'Something went wrong. Please try again later.',
+                }
+            } else {
+                response_modal.value = {
+                    status: e.response._data.status,
+                    message: e.response._data.message,
+                }
+                
             }
         } finally {
             is_loading.value = false;
