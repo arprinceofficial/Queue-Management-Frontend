@@ -6,16 +6,16 @@
     const current_path = computed(() => route.path);
 
     const queue_service_list = ref([
-        { name: 'Counter', icon: 'fas fa-list-ol', route: '/admin-panel/counter' },
         { name: 'Office', icon: 'fas fa-building', route: '/admin-panel/office' },
+        { name: 'Office User', icon: 'fas fa-user', route: '/admin-panel/user-office' },
+        { name: 'Agent User', icon: 'fas fa-user', route: '/admin-panel/user-agent' },
+        { name: 'Counter', icon: 'fas fa-list-ol', route: '/admin-panel/counter' },
         { name: 'Priority', icon: 'fas fa-sort-amount-up-alt', route: '/admin-panel/priority' },
         { name: 'Gender', icon: 'fas fa-venus-mars', route: '/admin-panel/gender' },
         { name: 'Service', icon: 'fas fa-list-alt', route: '/admin-panel/service' },
+        { name: 'Queue Service', icon: 'fas fa-list-alt', route: '/admin-panel/queue-service' },
         { name: 'WT News', icon: 'fas fa-tv', route: '/admin-panel/wt-news' },
         { name: 'WT Video', icon: 'fas fa-tv', route: '/admin-panel/wt-video' },
-        { name: 'Office User', icon: 'fas fa-user', route: '/admin-panel/user-office' },
-        { name: 'Agent User', icon: 'fas fa-user', route: '/admin-panel/user-agent' },
-        { name: 'Queue Service', icon: 'fas fa-list-alt', route: '/admin-panel/queue-service' },
         { name: 'Country', icon: 'fas fa-list-alt', route: '/admin-panel/country' },
     ]);
 
