@@ -37,6 +37,7 @@
     
     watch(() => props.data, (value) => {
         if (value) {
+            validations_errors.value = {};
             formData.value = {
                 name: value.name,
                 color: value.color,
@@ -56,28 +57,74 @@
         formData.value.status = isChecked.value ? 1 : 0;
     }
 
+    const validations_errors = ref({});
+    const skip_validations = ref([
+        'status',
+    ]);
+    const response_modal = ref({});
     const emit = defineEmits(['add_QueueService', 'cancel']);
     const is_loading = ref(false);
     const createQueueService = async () => {
+        validations_errors.value = {};
+        // const errors = Object.keys(formData.value).filter(item => !formData.value[item] && !skip_validations.value.includes(item));
+        // if(errors.length > 0){
+        //     errors.map(item => {
+        //         validations_errors.value[item] = `${item.replaceAll('_', ' ')} is required`;
+        //     });
+        //     console.log(validations_errors.value);
+        //     return;
+        // }
+
         try{
             is_loading.value = true;
             const getData = await $fetchAdmin($api_admin_queue_service_create, {
                 method: 'POST',
                 body: formData.value,
             });
+            response_modal.value = getData;
             if(getData.status == true){
                 emit('add_QueueService', getData.data);
             }
         } catch(e){
             console.log('Get Message',e.message);
+            if(e.response?.status === 403 || e.response?.status === 409){
+                for (const key in e.response._data.error) {
+                    if (e.response._data.error.hasOwnProperty(key)) {
+                        const value = e.response._data.error[key][0];
+                        validations_errors.value[key] = value;
+                    }
+                }
+            } else if (!e.response?.status){
+                response_modal.value = {
+                    status: false,
+                    message: 'Something went wrong. Please try again later.',
+                }
+            } else {
+                response_modal.value = {
+                    status: e.response._data.status,
+                    message: e.response._data.message,
+                }
+                
+            }
         } finally {
             is_loading.value = false;
         }
     }
     const updateQueueService = async () => {
+        validations_errors.value = {};
+        // const errors = Object.keys(formData.value).filter(item => !formData.value[item] && !skip_validations.value.includes(item));
+        // if(errors.length > 0){
+        //     errors.map(item => {
+        //         validations_errors.value[item] = `${item.replaceAll('_', ' ')} is required`;
+        //     });
+        //     console.log(validations_errors.value);
+        //     return;
+        // }
+
         try{
             is_loading.value = true;
             formData.value.id = props.data.id;
+            response_modal.value = getData;
             const getData = await $fetchAdmin($api_admin_queue_service_update, {
                 method: 'POST',
                 body: formData.value,
@@ -87,6 +134,25 @@
             }
         } catch(e){
             console.log('Get Message',e.message);
+            if(e.response?.status === 403 || e.response?.status === 409){
+                for (const key in e.response._data.error) {
+                    if (e.response._data.error.hasOwnProperty(key)) {
+                        const value = e.response._data.error[key][0];
+                        validations_errors.value[key] = value;
+                    }
+                }
+            } else if (!e.response?.status){
+                response_modal.value = {
+                    status: false,
+                    message: 'Something went wrong. Please try again later.',
+                }
+            } else {
+                response_modal.value = {
+                    status: e.response._data.status,
+                    message: e.response._data.message,
+                }
+                
+            }
         } finally {
             is_loading.value = false;
         }
@@ -151,6 +217,7 @@
                                         <input type="text" name="name" id="name"
                                             v-model="formData.name"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <InputError class="text-sm py-3 mb-2" :message="validations_errors.name" :text_size="'text-sm'" />
                                     </div>
                                     <div class="">
                                         <label for="color"
@@ -159,6 +226,7 @@
                                             v-model="formData.color"
                                             placeholder="0083C4"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <InputError class="text-sm py-3 mb-2" :message="validations_errors.color" :text_size="'text-sm'" />
                                     </div>
                                     <div class="">
                                         <label for="slug"
@@ -166,6 +234,7 @@
                                         <input type="text" name="slug" id="slug"
                                             v-model="formData.slug"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <InputError class="text-sm py-3 mb-2" :message="validations_errors.slug" :text_size="'text-sm'" />
                                     </div>
                                     <div class="">
                                         <label for="route"
@@ -173,7 +242,8 @@
                                         <input type="text" name="route" id="route"
                                             v-model="formData.route"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                                    </div>
+                                        <InputError class="text-sm py-3 mb-2" :message="validations_errors.route" :text_size="'text-sm'" />
+                                     </div>
                                     <div class="">
                                         <label for="icon"
                                             class="block text-sm font-medium text-gray-700">Icon</label>
@@ -181,6 +251,7 @@
                                             v-model="formData.icon"
                                             placeholder="fa-solid fa-messages-question"
                                             class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                                        <InputError class="text-sm py-3 mb-2" :message="validations_errors.icon" :text_size="'text-sm'" />
                                     </div>
                                     <div class="flex items-end">
                                         <div class="flex items-center gap-4">
@@ -199,8 +270,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex justify-center">
-                                <h1 class="text-lg font-bold text-gray-900 py-8">Fields</h1>
+                            <div class="flex flex-col items-center justify-center py-8">
+                                <h1 class="text-lg font-bold text-gray-900">Fields</h1>
+                                <InputError class="text-sm py-3 mb-2" :message="validations_errors.fields" :text_size="'text-sm'" />
                             </div>
                             <!-- {{ formData.fields }} -->
                             <template v-if="formData.fields?.length > 0">
