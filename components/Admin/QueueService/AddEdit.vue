@@ -10,7 +10,22 @@
     const {
         $api_admin_queue_service_create,
         $api_admin_queue_service_update,
+        $api_admin_queue_service,
     } = useNuxtApp();
+
+    const loadQueueList = async (id) => {
+        try{
+            const getData = await $fetchAdmin(`${$api_admin_queue_service}/${id}`, {
+                method: 'GET',
+            });
+            if(getData.status == true){
+                formData.value = getData.data;
+                isChecked.value = getData.data.status == 1 ? true : false;
+            }
+        } catch(e){
+            console.log('Get Message',e.message);
+        }
+    }
 
     const props = defineProps({
         isOpen: {
@@ -37,6 +52,9 @@
     
     watch(() => props.data, (value) => {
         if (value) {
+            if (value.id) {
+                loadQueueList(value.id);
+            }
             validations_errors.value = {};
             formData.value = {
                 name: value.name,

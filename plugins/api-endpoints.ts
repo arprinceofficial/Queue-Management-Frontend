@@ -55,6 +55,7 @@ export default defineNuxtPlugin(() => {
             api_admin_agent_user_update: 'agent-user-update',
             api_admin_agent_user_delete: 'agent-user-delete',
 
+            api_admin_queue_service: 'queue-service',
             api_admin_queue_service_list: 'queue-service-list',
             api_admin_queue_service_create: 'queue-service-create',
             api_admin_queue_service_update: 'queue-service-update',
