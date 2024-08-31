@@ -84,6 +84,7 @@
 	}
 
 	const is_submit_loading = ref(false);
+	const token_generated = ref({});
 	const generateToken = async () => {
 		// console.log(forms.value);
 		// ++cur_step.value;
@@ -97,6 +98,7 @@
             });
 			console.log(getData);
 			if(getData.status == true){
+				token_generated.value = getData.data;
 				++cur_step.value;
 				setTimeout(() => { router.push('/service'); }, 3000);
 			}
@@ -141,7 +143,7 @@
 							@click="backPreview" 
 							:disabled="is_submit_loading" 
 							:class="[is_submit_loading ? 'bg-gray-300 text-[#4D5155] cursor-not-allowed hover:bg-gray-300 focus:bg-gray-300 active:bg-gray-300' : '']"
-						>{{ preview_mode ? 'Preview' : 'Back' }}</ButtonPrimary>
+						>{{ preview_mode ? 'Edit' : 'Back' }}</ButtonPrimary>
 
 						<ButtonPrimary v-if="cur_step == 0" 
 							class="w-full h-[70px] text-[24px] px-[30px] py-[15px]" 
@@ -158,6 +160,6 @@
 				</div>
 			</div>
 		</div>
-		<ServiceSuccess v-else-if="cur_step == 2" />
+		<ServiceSuccessV2 v-else-if="cur_step == 2" :data="token_generated" />
 	</div>
 </template>

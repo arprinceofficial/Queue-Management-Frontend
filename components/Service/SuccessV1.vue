@@ -1,4 +1,10 @@
 <script setup>
+    const props = defineProps({
+		data: {
+            type: Object,
+            required: true,
+		},
+	});
 </script>
 <template>
     <div class="flex justify-center items-center h-full">
@@ -9,6 +15,8 @@
             </svg>
             <h1 class="text-[#009A67] text-[54px] font-semibold">Congratulations</h1>
             <p class="text-[#4D5155] text-[24px] text-center">Your token has been generated successfully</p>
+            <h1 class="text-[#009A67] text-[40px] font-bold pt-8">Token No:</h1>
+            <h1 class="text-[#009A67] text-5xl font-bold pt-0">{{ data?.token }}</h1>
         </div>
     </div>
 </template>
