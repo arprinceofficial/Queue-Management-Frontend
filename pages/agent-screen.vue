@@ -71,7 +71,7 @@
                 <div class="md:w-1/3 w-full h-full" style="border-right: 1px solid #767676;">
                     <div class="h-full">
                         <div class="flex justify-center items-center" style="height: 200px;">
-                            <ApplicationLogo :width="'450px'" :height="'100%'" />
+                            <ApplicationLogo :width="'150px'" :height="'100%'" />
                         </div>
                         <div style="height: calc(100vh - 200px); background: #0083C4;">
                             <div class="h-[100px] flex items-center justify-center" style="background: #005986;">
