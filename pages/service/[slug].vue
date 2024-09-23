@@ -99,8 +99,9 @@
 			console.log(getData);
 			if(getData.status == true){
 				token_generated.value = getData.data;
-				++cur_step.value;
-				setTimeout(() => { router.push('/service'); }, 3000);
+				// ++cur_step.value;
+				// setTimeout(() => { router.push('/service'); }, 3000);
+				router.push('/service/success' + '?token=' + getData.data.token);
 			}
         } catch(e){
             console.log('Get Message', e.message);
