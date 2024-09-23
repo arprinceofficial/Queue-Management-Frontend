@@ -30,12 +30,12 @@
     <!-- <pre>{{ queue_service_list }}</pre> -->
     <div
         class="bg-[#D4E7DF] h-full py-2 overflow-auto transition-all duration-500 ease-in-out transform"
-        :class="hamburger_button ? 'translate-x-0 w-[400px]' : '-translate-x-full w-0'"
+        :class="hamburger_button ? 'translate-x-0 w-[300px] lg:w-[400px]' : '-translate-x-full w-0'"
     >
         <div v-if="hamburger_button" class="w-full flex justify-end pb-3 px-2">
             <button @click="hamburger_button = !hamburger_button"
                 class="inline-flex  items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400 transition duration-150 ease-in-out">
-                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                <svg class="h-4 w-4 lg:h-6 lg:w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                     <path :class="{
                         hidden: hamburger_button,
                         'inline-flex': !hamburger_button
@@ -49,15 +49,15 @@
                 </svg>
             </button>
         </div>
-        <div class="text-[#4D5155] text-[22px] font-medium leading-[normal] mr-3"
+        <div class="text-[#4D5155] text-[14px] lg:text-[22px] font-medium leading-[normal] mr-3"
             :class="current_slug == item.route ? 'rounded-tl-none rounded-br-[40px] rounded-tr-[40px] rounded-bl-none bg-[#FFF]' : ''"
             v-for="(item, index) in queue_service_list" :key="index">
-            <NuxtLink :to="item.route">
+            <NuxtLink :to="'/service/'+item.route" @click="hamburger_button = !hamburger_button">
                 <div class="flex items-center">
-                    <span v-if="current_slug == item.route" class="w-[6px] h-[40px] ml-2 border-[#0083C4] border-[3px] rounded-xl"></span>
-                    <div class="p-4">
-                        <i class="text-[22px] pr-3" :class="[item.icon, current_slug == item.route ? 'text-[#0083C4]' : 'text-[#4D5155] ']"></i>
-                        <span class="text-[#4D5155] text-[22px]">{{ item.name }}</span>
+                    <span v-if="current_slug == item.route" class="w-[3px] lg:w-[6px] h-[20px] lg:h-[40px] ml-2 border-[#0083C4] border-[3px] rounded-xl"></span>
+                    <div class="p-2 lg:p-4">
+                        <i class="text-[14px] lg:text-[22px] pr-2 lg:pr-3" :class="[item.icon, current_slug == item.route ? 'text-[#0083C4]' : 'text-[#4D5155] ']"></i>
+                        <span class="text-[#4D5155] text-[14px] lg:text-[22px]">{{ item.name }}</span>
                     </div>
                 </div>
             </NuxtLink>

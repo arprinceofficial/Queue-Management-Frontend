@@ -5,7 +5,7 @@
 		},
 		text_size: {
 			type: String,
-			default: 'text-xl'
+			default: 'text-sm lg:text-xl'
 		}
 	});
 </script>

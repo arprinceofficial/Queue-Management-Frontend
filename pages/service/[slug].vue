@@ -114,7 +114,7 @@
 	<!-- <pre>{{ forms }}</pre> -->
 	<!-- {{ current_route }} <br> {{ current_slug }} <br> {{ current_path }} <br> -->
 	<!-- <pre>{{ queue_service }}</pre> -->
-	<div class="h-[calc(100vh-76px)]"> <!-- overflow-auto h-[calc(100vh-76px)] -->
+	<div class="h-[calc(100vh-60px)] lg:h-[calc(100vh-76px)]"> <!-- overflow-auto h-[calc(100vh-76px)] -->
 		<div v-if="cur_step < 2" class="flex flex-col justify-between h-full">
 			<div class="flex h-full">
 				<ServiceLeftSide :queue_service="queue_service" />
@@ -137,21 +137,22 @@
 							</div>
 						</template>
 					</div>
-					<div class="w-full flex sm:flex-nowrap flex-wrap justify-center mt-6 gap-6 pb-8">
+					<div class="w-full flex sm:flex-nowrap sm:flex-wrap justify-center mt-3 lg:mt-6 gap-3 lg:gap-6 pb-4 lg:pb-8">
 						<ButtonPrimary 
-							class="w-full h-[70px] text-[24px] px-[30px] py-[15px]" 
+							class="w-full h-[35px] lg:h-[70px] text-[14px] px-[8px] lg:px-[15px] py-[3px] lg:py-[8px] lg:text-[24px] lg:px-[30px] lg:py-[15px]" 
 							@click="backPreview" 
 							:disabled="is_submit_loading" 
 							:class="[is_submit_loading ? 'bg-gray-300 text-[#4D5155] cursor-not-allowed hover:bg-gray-300 focus:bg-gray-300 active:bg-gray-300' : '']"
 						>{{ preview_mode ? 'Edit' : 'Back' }}</ButtonPrimary>
 
 						<ButtonPrimary v-if="cur_step == 0" 
-							class="w-full h-[70px] text-[24px] px-[30px] py-[15px]" 
+							class="w-full h-[35px] lg:h-[70px] text-[14px] px-[8px] lg:px-[15px] py-[3px] lg:py-[8px] lg:text-[24px] lg:px-[30px] lg:py-[15px]" 
 							@click="nextPreview"
 						>Next</ButtonPrimary>
 
 						<ButtonPrimary v-else 
-							class="w-full h-[70px] text-[24px] px-[30px] py-[15px]" 
+							id="generate-token"
+							class="w-full h-[35px] lg:h-[70px] text-[14px] px-[8px] lg:px-[15px] py-[3px] lg:py-[8px] lg:text-[24px] lg:px-[30px] lg:py-[15px]" 
 							@click="generateToken" 
 							:disabled="is_submit_loading" 
 							:class="[is_submit_loading ? 'bg-gray-300 text-[#4D5155] cursor-not-allowed hover:bg-gray-300 focus:bg-gray-300 active:bg-gray-300' : '']"

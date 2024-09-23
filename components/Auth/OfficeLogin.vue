@@ -38,27 +38,27 @@
 
 <template>
 	<ClientOnly>
-		<div class="mt-24">
+		<div class="mt-5 lg:mt-24">
 			<div>
 				<div class="flex flex-col justify-center items-center">
 					<!-- <NuxtLink to="/"> -->
-					<ApplicationLogo :width="'200px'" :height="'121px'" />
+					<ApplicationLogo class="w-[80px] lg:w-[204px]"  />
 					<!-- </NuxtLink> -->
-					<h2 class="mt-6 text-center text-[64px] font-bold tracking-tight text-gray-900 dark:text-gray-200 mt-[80px]">
+					<h2 class="mt-2 lg:mt-6 text-center text-[32px] lg:text-[64px] font-bold tracking-tight text-gray-900 dark:text-gray-200 mt-[10px] lg:mt-[80px]">
 						Login</h2>
 				</div>
 			</div>
-			<form @submit.prevent="submit" class="mt-24">
-				<div class="mt-10">
-					<InputLabel for="loginInput" value="User ID" class="text-[25px] mb-6" />
+			<form @submit.prevent="submit" class="lg:mt-24">
+				<div>
+					<InputLabel for="loginInput" value="User ID" class="text-[14px] lg:text-[25px] mb-2 lg:mb-6" />
 					<div class="relative mt-1">
-						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-8">
-							<UserIcon class="h-8 w-8 text-gray-400" aria-hidden="true" />
+						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 lg:pl-8">
+							<UserIcon class="h-4 w-4 lg:h-8 lg:w-8 text-gray-400" aria-hidden="true" />
 						</div>
 						<InputText
 							id="loginInput"
 							type="text"
-							class="pl-[80px] h-[72px] sm:text-xl text-[20px] rounded-[50px]"
+							class="pl-[40px] lg:pl-[80px] h-[36px] lg:h-[72px] sm:text-sm lg:text-[20px] rounded-[50px]"
 							v-model="form.loginInput"
 							required
 							autofocus
@@ -68,27 +68,27 @@
 					<InputError class="mt-2" :message="unauthorizedError" />
 				</div>
 
-				<div class="mt-10">
-					<InputLabel for="password" value="Password" class="text-[25px] mb-6" />
+				<div class="mt-3 lg:mt-10">
+					<InputLabel for="password" value="Password" class="text-[14px] lg:text-[25px] mb-2 lg:mb-6" />
 					<div class="relative mt-1">
-						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-8">
-							<LockClosedIcon class="h-8 w-8 text-gray-400 " aria-hidden="true" />
+						<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 lg:pl-8">
+							<LockClosedIcon class="h-4 w-4 lg:h-8 lg:w-8 text-gray-400 " aria-hidden="true" />
 						</div>
 						<InputText 
 							id="password" 
 							:type="password_open ? 'text' : 'password'"
-							class="pl-[80px] h-[72px] sm:text-xl text-[20px] rounded-[50px]"
+							class="pl-[40px] lg:pl-[80px] h-[36px] lg:h-[72px] sm:text-sm lg:text-[20px] rounded-[50px]"
 							v-model="form.password" 
 							required 
 							autocomplete="current-password"
 							placeholder="i.e. password#123" />
-						<i :class="['absolute top-[25px] right-10 text-[24px] text-gray-600 fa cursor-pointer hidden', password_open ? 'fa-eye' : 'fa-eye-slash']"
+						<i :class="['absolute top-[11px] lg:top-[25px] right-4 lg:right-10 text-[14px] lg:text-[24px] text-gray-600 fa cursor-pointer hidden', password_open ? 'fa-eye' : 'fa-eye-slash']"
 							@click="password_view_status(!password_open)"></i>
 					</div>
 				</div>
 
-				<div class="flex items-center justify-center mt-16">
-					<ButtonPrimary class="w-[618px] h-[85px] text-[32px] px-[53px] py-[17px] gap-[10px]" :class="{ 'opacity-25': isLoading }" :disabled="isLoading">
+				<div class="flex items-center justify-center mt-6 lg:mt-16">
+					<ButtonPrimary class="lg:w-[618px] h-[45px] lg:h-[85px] text-[18px] lg:text-[32px] px-[53px] py-[17px] gap-[10px]" :class="{ 'opacity-25': isLoading }" :disabled="isLoading">
 						<span v-if="!isLoading">Login</span>
 						<svg v-else class="text-gray-300 animate-spin" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"
 							width="40" height="40">
@@ -105,6 +105,6 @@
 			</form>
 		</div>
 
-		<img class="pt-6" src="/img/login-footer.png" alt="">
+		<img class="pt-4 lg:pt-6" src="/img/login-footer.png" alt="">
 	</ClientOnly>
 </template>

@@ -26,7 +26,7 @@
 </script>
 <template>
     <!-- <pre>{{ office_user }}</pre> -->
-    <nav class="h-[75px] dark:bg-gray-800 dark:bg-[linear-gradient(to_right,#333333,#000000)] bg-[#F1F6FF] border-b border-gray-100 dark:border-gray-700 z-[60] top-0">
+    <nav class="h-[60px] lg:h-[75px] dark:bg-gray-800 dark:bg-[linear-gradient(to_right,#333333,#000000)] bg-[#F1F6FF] border-b border-gray-100 dark:border-gray-700 z-[60] top-0">
         <!-- Primary Navigation Menu -->
         <div class="mx-auto pl-2 pr-4 sm:pr-6 lg:pr-8 h-full">
             <div class="flex justify-between h-full">
@@ -47,9 +47,9 @@
                         </svg>
                     </button>
                     <!-- Logo -->
-                    <div class="shrink-0 flex items-center">
+                    <div class="pl-2 shrink-0 flex items-center ">
                         <NuxtLink href="/">
-                            <ApplicationLogo :width="'50px'" :height="'50px'" />
+                            <ApplicationLogo class="w-[45px] lg:w-[60px] lg:h-[220px] flex items-center" />
                         </NuxtLink>
                     </div>
                 </div>

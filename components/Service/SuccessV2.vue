@@ -10,7 +10,7 @@
     <div class="h-full w-full flex flex-col justify-between items-center">
         <div></div>
         <div class="h-full w-full flex justify-center items-center relative bg-[url('/img/success-bg.png')] bg-no-repeat bg-cover bg-center">
-            <div class="w-[800px] h-[800px] flex justify-center items-center absolute">
+            <div class="w-[400px] h-[400px] lg:w-[800px] lg:h-[800px] flex justify-center items-center absolute">
                 <svg width="799" height="799" viewBox="0 0 799 799" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g opacity="0.5">
                     <path d="M399.221 798.064C619.499 798.064 798.07 619.493 798.07 399.214C798.07 178.936 619.499 0.365234 399.221 0.365234C178.942 0.365234 0.371582 178.936 0.371582 399.214C0.371582 619.493 178.942 798.064 399.221 798.064Z" fill="url(#paint0_radial_2316_1371)" fill-opacity="0.1"/>
@@ -54,19 +54,19 @@
                     </defs>
                 </svg>
             </div>
-            <div class="w-[565px] h-[565px] flex justify-center items-center rounded-[50%] flex flex-col justify-center items-center bg-white">
+            <div class="w-[283px] h-[283px] lg:w-[565px] lg:h-[565px] flex justify-center items-center rounded-[50%] flex flex-col justify-center items-center bg-white">
                 <div class="flex flex-col justify-center items-center absolute pt-8">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="102" height="102" viewBox="0 0 102 102" fill="none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-[45px] w-[45px] lg:h-[102px] lg:w-[102px]" viewBox="0 0 102 102" fill="none">
                         <circle cx="50.8696" cy="50.9565" r="50.8696" fill="#00A65D"/>
                         <path d="M42.629 71C41.4684 71 40.3659 70.5424 39.5535 69.7415L23.1313 53.5532C21.4484 51.8943 21.4484 49.1486 23.1313 47.4897C24.8141 45.8308 27.5995 45.8308 29.2823 47.4897L42.629 60.6463L72.4559 31.2442C74.1388 29.5853 76.9242 29.5853 78.607 31.2442C80.2899 32.903 80.2899 35.6488 78.607 37.3076L45.7046 69.7415C44.8921 70.5424 43.7896 71 42.629 71Z" fill="white"/>
                     </svg>
-                    <h1 class="text-[#009A67] text-[50px] font-semibold pt-8">Congratulations!</h1>
-                    <p class="text-[#4D5155] text-[22px] text-center">Your token has been generated successfully</p>
-                    <h1 class="text-[#009A67] text-[40px] font-bold pt-8">Token No:</h1>
-                    <h1 class="text-[#009A67] text-5xl font-bold pt-0">{{ data?.token }}</h1>
+                    <h1 class="text-[#009A67] text-[25px] lg:text-[50px] font-semibold pt-3 lg:pt-8">Congratulations!</h1>
+                    <p class="text-[#4D5155] w-[300px] lg:w-[600px] text-[14px] lg:text-[22px] text-center">Your token has been generated successfully</p>
+                    <h1 class="text-[#009A67] text-[20px] lg:text-[40px] font-bold pt-3 lg:pt-8">Token No:</h1>
+                    <h1 class="text-[#009A67] text-3xl lg:text-5xl font-bold pt-0">{{ data?.token }}</h1>
                 </div>
             </div>
         </div>
-        <img class="pt-6" src="/img/success-footer.png" alt="">
+        <img class="pt-2 lg:pt-6" src="/img/success-footer.png" alt="">
     </div>
 </template>
