@@ -48,7 +48,7 @@
 						Login</h2>
 				</div>
 			</div>
-			<form @submit.prevent="submit" class="lg:mt-24">
+			<form @submit.prevent="submit" class="lg:mt-24 px-5">
 				<div>
 					<InputLabel for="loginInput" value="User ID" class="text-[14px] lg:text-[25px] mb-2 lg:mb-6" />
 					<div class="relative mt-1">
