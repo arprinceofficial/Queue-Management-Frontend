@@ -19,8 +19,15 @@ export default defineNuxtPlugin(() => {
                 return re.test(String(email).toLowerCase())
             },
             validateContactNumber: (number: any) => {
-                const re = /^[\+]?[0-9]{1,3}?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,9}$/g
-                return re.test(number)
+                // const re = /^[\+]?[0-9]{1,3}?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,9}$/g
+                // return re.test(number)
+                // if(number.length==10 || number.length==11) {
+                if(number.length==11) {
+                    if(number.startsWith('01')) {
+                        const re = /^[\+]?[0-9]{1,3}?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,9}$/g
+                        return re.test(number) 
+                    }
+                }
             },
             validateUpperLowerCase: (string: any) => {
                 let uppercase = false, lowercase = false

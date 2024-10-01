@@ -2,7 +2,7 @@
 	definePageMeta({ middleware: ['auth-office'], layout: 'office' });
 	import SelectButton from './Forms/SelectButton.vue';
 	import TextInputBlock from './Forms/TextInput.vue';
-	const { $api_office_queue_services, $api_office_queue_vouchers_store } = useNuxtApp();
+	const { $api_office_queue_services, $api_office_queue_vouchers_store, $validateEmail, $validateContactNumber } = useNuxtApp();
 	const { office_user } = officeAuth();
 	const route = useRoute();
 	const current_slug = computed( () => route.params.slug );
@@ -60,7 +60,23 @@
 			});
 			return;
 		}
-		
+		// Check email
+		const email = queue_service.value.fields.find(item => item.type == 'email');
+		if(email && email.value){
+			if(!$validateEmail(email.value)){
+				validations_errors.value[email.name] = 'Invalid email format';
+				return;
+			}
+		}
+		// Check mobile
+		const mobile = queue_service.value.fields.find(item => item.name == 'mobile');
+		if(mobile && mobile.value){
+			if(!$validateContactNumber(mobile.value)){
+				validations_errors.value[mobile.name] = 'Invalid mobile number';
+				return;
+			}
+		}
+
 		queue_service.value.fields.map(item => {
 			forms.value[item.name] = item.value;
 			// Set mobile number with country code
