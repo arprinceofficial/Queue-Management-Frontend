@@ -16,7 +16,7 @@
         </div>
         <div v-if="!preview_mode" class="flex">
             <span v-if="data.type == 'number'" class="flex items-center h-[30px] lg:h-[72px] text-[12px] lg:text-[20px] rounded-lg px-3 mr-3  mt-1 border-[2px] border-green-500 rounded-lg">
-                {{ office_user.country_code }}
+                {{ office_user.data.country_code }}
             </span>
             <InputText
                 :type="data.type"
@@ -27,7 +27,7 @@
         </div>
         <div v-else class="flex flex-wrap gap-3 mt-1">
             <div class="h-[30px] lg:h-[72px] text-[12px] lg:text-[20px] rounded-lg flex w-full border-[1px] border-[solid] border-gray-300 [box-shadow:0px_1px_3px_0px_rgba(0,_0,_0,_0.05)] items-center px-3 bg-[#F7F7F7] cursor-not-allowed">
-                <div v-if="data.type == 'number'">{{ office_user.country_code }}&nbsp;</div>
+                <div v-if="data.type == 'number'">{{ office_user.data.country_code }}&nbsp;</div>
                 {{ data.value }}
             </div>
         </div>
