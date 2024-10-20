@@ -8,3 +8,11 @@ API_URL_OFFICE="https://backend-queue.arprince.me/api/office/"
 API_URL_AGENT="https://backend-queue.arprince.me/api/agent/"
 API_BASE_URL="https://backend-queue.arprince.me"
 VITE_CJS_TRACE=true vite dev
+
+# Firebase App Configuration
+FIREBASE_API_KEY=""
+FIREBASE_AUTH_DOMAIN=""
+FIREBASE_PROJECT_ID=""
+FIREBASE_STORAGE_BUCKET=""
+FIREBASE_MESSAGING_SENDER_ID=""
+FIREBASE_APP_ID=""

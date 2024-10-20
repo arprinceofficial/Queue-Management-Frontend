@@ -1,7 +1,10 @@
+import { signInWithPopup } from 'firebase/auth';
+
 // api endpoint
 const LOGIN = '/login';
 const LOGOUT = '/logout';
 const CURRENT_USER = '/current-user';
+const SSO_LOGIN = '/sso-login';
 
 // Value is initialized in: ~/plugins/authOffice.ts
 export const officeUser = () => {
@@ -9,6 +12,8 @@ export const officeUser = () => {
 };
 
 export const officeAuth = () => {
+	const nuxtApp = useNuxtApp();
+
 	const router = useRouter();
 	const office_user: any = officeUser();
 	const isOfficeLoggedIn = computed(() => !!office_user.value);
@@ -18,6 +23,24 @@ export const officeAuth = () => {
 		if (isOfficeLoggedIn.value) return;
 
 		const response: any = await $fetchOffice(LOGIN, { method: 'post', body: credentials });
+		cookie.value = response.data?.access_token;
+		return response;
+	}
+
+	async function officeLoginGoogle() {
+		if (isOfficeLoggedIn.value) return;
+
+		const auth = nuxtApp.$auth;
+		const provider = new nuxtApp.$GoogleAuthProvider();
+		const result = await signInWithPopup(auth, provider);
+		// console.log(result);
+		const { user } = result;
+		const idToken = await user.getIdToken();
+
+		const response: any = await $fetchOffice(SSO_LOGIN, {
+			method: 'POST',
+			body: { idToken },
+		});
 		cookie.value = response.data?.access_token;
 		return response;
 	}
@@ -34,7 +57,8 @@ export const officeAuth = () => {
 		office_user,
 		isOfficeLoggedIn,
 		login,
-		logout
+		logout,
+		officeLoginGoogle
 	};
 };
 
